@@ -6,17 +6,38 @@ package com.computadores.model;
  */
 public class Endereco implements IEntidade {
 
-    private int codigo;
-    private int cep;
+    private Integer codigo;
+    private Integer cep;
     private String logradouro;
     private String complemento;
     private String bairro;
     private Cidade cidade;
-    private boolean padrao;
+    private Boolean padrao = false;
 
     @Override
     public boolean validar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // Valida a existência do CEP
+        if (cep == null || cep <= 0) {
+            return false;
+        } //
+        // Valida o campo Logradouro
+        else if (logradouro == null || logradouro.length() == 0 || logradouro.length() > 80) {
+            return false;
+        } //
+        // Valida o campo Complemento
+        else if (complemento != null && (complemento.length() == 0 || complemento.length() > 50)) {
+            return false;
+        } //
+        // Valida o campo Bairro
+        else if (bairro == null || bairro.length() == 0 || bairro.length() > 80) {
+            return false;
+        } //
+        // Valida o campo Cidade
+        else if (cidade == null) {
+            return false;
+        }
+
+        return true;
     }
 
     public int getCodigo() {

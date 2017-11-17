@@ -18,9 +18,6 @@ public abstract class Cliente implements IEntidade {
     private List<Endereco> enderecos;
     private boolean administrador;
 
-    @Override
-    public abstract boolean validar();
-
     public int getCodigo() {
         return codigo;
     }
