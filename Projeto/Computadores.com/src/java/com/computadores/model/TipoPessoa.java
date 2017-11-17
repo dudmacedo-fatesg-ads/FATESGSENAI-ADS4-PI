@@ -5,12 +5,14 @@ package com.computadores.model;
  * @author eduardo
  */
 public enum TipoPessoa {
-    FISICA("Pessoa Física"),
-    JURIDICA("Pessoa Jurídica");
+    FISICA("F", "Pessoa Física"),
+    JURIDICA("J", "Pessoa Jurídica");
 
     public final String descricao;
+    public final String id;
 
-    private TipoPessoa(String descricao) {
+    private TipoPessoa(String id, String descricao) {
+        this.id = id;
         this.descricao = descricao;
     }
 

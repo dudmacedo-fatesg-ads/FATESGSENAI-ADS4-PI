@@ -2,10 +2,13 @@ package com.computadores.dal;
 
 import com.computadores.error.DatabaseException;
 import com.computadores.model.Cliente;
+import com.computadores.model.PessoaFisica;
+import com.computadores.model.PessoaJuridica;
 import com.computadores.model.TipoPessoa;
 import com.computadores.util.DBFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -16,7 +19,7 @@ import java.util.logging.Logger;
  * @author eduardo
  */
 public class ClienteDAO implements IEntidadeDAO<Cliente> {
-    
+
     Connection cnx = DBFactory.getConnection();
 
     @Override
@@ -26,55 +29,62 @@ public class ClienteDAO implements IEntidadeDAO<Cliente> {
 
     @Override
     public void create(Cliente obj) throws DatabaseException {
+        // Auxílio para definir os campos do Query que fará o Insert
         String pessoaCampos = "", pessoaValores = "";
         if (obj.getTipo() == TipoPessoa.FISICA) {
-            pessoaCampos = "";
-            pessoaValores = "";
+            pessoaCampos = "cpf, rg, nome, dtnasc";
+            pessoaValores = "?, ?, ?, ?";
         } else if (obj.getTipo() == TipoPessoa.JURIDICA) {
-            pessoaCampos = "";
-            pessoaValores = "";
-            
+            pessoaCampos = "cnpj, ie, ie_estadoemissor, razaosocial";
+            pessoaValores = "?, ?, ?, ?";
+
         }
+
+        // Insert Query
         String sql = String.format(
-                "INSERT INTO %s (%s, )",
+                "INSERT INTO %s (tipo, %s, telresidencial, telcomercial, telcelular, email, senha, administrador) "
+                + "VALUES (?, %s, ?, ?, ?, ?, ?, ?) RETURNING codigo",
                 getTabela(),
-                (obj.getTipo() == TipoPessoa.FISICA)?"cpf, rg, nome":""
+                pessoaCampos,
+                pessoaValores
         );
-        
-//        codigo serial NOT NULL,
-//        tipo character(1) NOT NULL DEFAULT 'F'::bpchar,
-//        cpf bigint,
-//        rg integer,
-//        nome character varying(60),
-//        dtnasc date,
-//        cnpj bigint,
-//        ie character varying(18),
-//        ie_estadoemissor integer,
-//        razaosocial character varying(60),
-//        telresidencial character varying(14),
-//        telcomercial character varying(14),
-//        telcelular character varying(15),
-//        email character varying(80) NOT NULL,
-//        senha character(60),
-//        administrador boolean NOT NULL DEFAULT false
-        
-        
-        String sql = String.format(
-                "INSERT INTO %s (idf, tipo, nome, endereco, fone, email, dtcadastro, status) "
-                + "VALUES(?,?,?,?,?,?,?,?)", getTabela());
 
         try (PreparedStatement pstmt = cnx.prepareStatement(sql)) {
-            pstmt.setLong(1, obj.getIdf());
-            pstmt.setString(2, String.valueOf(obj.getTipo()));
-            pstmt.setString(3, obj.getNome());
-            pstmt.setString(4, obj.getEndereco());
-            pstmt.setString(5, obj.getFone());
-            pstmt.setString(6, obj.getEmail());
-            pstmt.setDate(7, new java.sql.Date(obj.getDtcadastro().getTime()));
-            pstmt.setBoolean(8, obj.getStatus());
+            pstmt.setString(1, obj.getTipo().id);
 
-            pstmt.execute();
+            // Campos específicos PF e PJ
+            if (obj.getTipo() == TipoPessoa.FISICA) {
+                pstmt.setLong(2, ((PessoaFisica) obj).getCpf());
+                pstmt.setInt(3, ((PessoaFisica) obj).getRg());
+                pstmt.setString(4, ((PessoaFisica) obj).getNome());
+                pstmt.setDate(5, new java.sql.Date(((PessoaFisica) obj).getDtNasc().getTime()));
+            } else if (obj.getTipo() == TipoPessoa.JURIDICA) {
+                pstmt.setLong(2, ((PessoaJuridica) obj).getCnpj());
+                pstmt.setString(3, ((PessoaJuridica) obj).getInscricaoestadual());
 
+                if (((PessoaJuridica) obj).getEstadoemissor() != null) {
+                    pstmt.setInt(4, (((PessoaJuridica) obj).getEstadoemissor()).getCodigo());
+                } else {
+                    pstmt.setNull(4, java.sql.Types.INTEGER);
+                }
+
+                pstmt.setString(5, ((PessoaJuridica) obj).getRazaoSocial());
+            }
+
+            // Demais campos
+            pstmt.setString(6, obj.getTelresidencial());
+            pstmt.setString(7, obj.getTelcomercial());
+            pstmt.setString(8, obj.getTelcelular());
+            pstmt.setString(9, obj.getEmail());
+            pstmt.setString(10, obj.getSenha());
+            pstmt.setBoolean(11, obj.isAdministrador());
+
+            // Executa operação
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                obj.setCodigo(rs.getInt("codigo"));
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new DatabaseException(ex, "Erro ao inserir registro");
