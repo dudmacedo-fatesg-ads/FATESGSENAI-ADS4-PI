@@ -38,7 +38,6 @@ public class ClienteDAO implements IEntidadeDAO<Cliente> {
         } else if (obj.getTipo() == TipoPessoa.JURIDICA) {
             pessoaCampos = "cnpj, ie, ie_estadoemissor, razaosocial";
             pessoaValores = "?, ?, ?, ?";
-
         }
 
         // Insert Query
@@ -155,7 +154,57 @@ public class ClienteDAO implements IEntidadeDAO<Cliente> {
 
     @Override
     public void update(Cliente obj) throws DatabaseException {
+        // Auxílio para definir os campos do Query que fará o Update
+        String pessoaCampos = "", pessoaValores = "";
+        if (obj.getTipo() == TipoPessoa.FISICA) {
+            pessoaCampos = "rg, nome, dtnasc";
+            pessoaValores = "?, ?, ?";
+        } else if (obj.getTipo() == TipoPessoa.JURIDICA) {
+            pessoaCampos = "ie, ie_estadoemissor, razaosocial";
+            pessoaValores = "?, ?, ?";
+        }
 
+        String sql = String.format(
+                "UPDATE %s SET "
+                + "(%s, telresidencial, telcomercial, telcelular, email, senha, administrador) = "
+                + "(%s, ?, ?, ?, ?, ?, ?) "
+                + "WHERE codigo = ?",
+                getTabela(),
+                pessoaCampos,
+                pessoaValores);
+
+        try (PreparedStatement pstmt = cnx.prepareCall(sql)) {
+            // Campos específicos PF e PJ
+            if (obj.getTipo() == TipoPessoa.FISICA) {
+                pstmt.setInt(1, ((PessoaFisica) obj).getRg());
+                pstmt.setString(2, ((PessoaFisica) obj).getNome());
+                pstmt.setDate(3, new java.sql.Date(((PessoaFisica) obj).getDtNasc().getTime()));
+            } else if (obj.getTipo() == TipoPessoa.JURIDICA) {
+                pstmt.setString(1, ((PessoaJuridica) obj).getInscricaoestadual());
+
+                if (((PessoaJuridica) obj).getEstadoemissor() != null) {
+                    pstmt.setInt(2, (((PessoaJuridica) obj).getEstadoemissor()).getCodigo());
+                } else {
+                    pstmt.setNull(2, java.sql.Types.INTEGER);
+                }
+
+                pstmt.setString(3, ((PessoaJuridica) obj).getRazaoSocial());
+            }
+
+            // Demais campos
+            pstmt.setString(4, obj.getTelresidencial());
+            pstmt.setString(5, obj.getTelcomercial());
+            pstmt.setString(6, obj.getTelcelular());
+            pstmt.setString(7, obj.getEmail());
+            pstmt.setString(8, obj.getSenha());
+            pstmt.setBoolean(9, obj.isAdministrador());
+
+            // Executa operação
+            pstmt.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DatabaseException(ex, "Erro ao atualizar registro");
+        }
     }
 
     @Override
@@ -169,7 +218,7 @@ public class ClienteDAO implements IEntidadeDAO<Cliente> {
             // Não vai funcionar se o cliente tiver endereço cadastrado
             // **/--/**
             //
-            
+
             pstmt.setLong(1, obj.getCodigo());
 
             pstmt.execute();
