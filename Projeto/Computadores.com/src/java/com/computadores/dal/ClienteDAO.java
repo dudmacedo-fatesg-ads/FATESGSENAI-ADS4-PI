@@ -198,6 +198,8 @@ public class ClienteDAO implements IEntidadeDAO<Cliente> {
             pstmt.setString(7, obj.getEmail());
             pstmt.setString(8, obj.getSenha());
             pstmt.setBoolean(9, obj.isAdministrador());
+            
+            pstmt.setInt(10, obj.getCodigo());
 
             // Executa operação
             pstmt.execute();
