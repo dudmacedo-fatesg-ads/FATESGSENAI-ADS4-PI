@@ -20,5 +20,5 @@ public interface IEntidadeDAO<T> {
 
     public void delete(T obj) throws DatabaseException;
 
-    public List<T> getAll() throws DatabaseException;
+    public List<T> list() throws DatabaseException;
 }

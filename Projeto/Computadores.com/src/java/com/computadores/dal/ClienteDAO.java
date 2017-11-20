@@ -231,7 +231,7 @@ public class ClienteDAO implements IEntidadeDAO<Cliente> {
     }
 
     @Override
-    public List<Cliente> getAll() throws DatabaseException {
+    public List<Cliente> list() throws DatabaseException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
