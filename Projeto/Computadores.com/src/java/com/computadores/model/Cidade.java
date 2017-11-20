@@ -10,6 +10,14 @@ public class Cidade {
     private String nome;
     private Estado estado;
 
+    public Cidade() {
+
+    }
+
+    public Cidade(int codigo) {
+        this.codigo = codigo;
+    }
+
     public int getCodigo() {
         return codigo;
     }

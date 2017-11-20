@@ -1,12 +1,15 @@
 package com.computadores.dal;
 
 import com.computadores.error.DatabaseException;
+import com.computadores.model.Cidade;
+import com.computadores.model.Cliente;
 import com.computadores.model.Endereco;
 import com.computadores.util.DBFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -76,4 +79,42 @@ public class EnderecoDAO implements IEntidadeDAO<Endereco> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Retorna os endereços cadastrados de um determinado Cliente
+     *
+     * @param cliente
+     * @return Retorna os endereços cadastrados de um determinado Cliente
+     * @throws com.computadores.error.DatabaseException
+     */
+    public List<Endereco> getAll(Cliente cliente) throws DatabaseException {
+        String sql = String.format(
+                "SELECT * FROM %s WHERE cliente = ?",
+                getTabela());
+
+        try (PreparedStatement pstmt = cnx.prepareStatement(sql)) {
+            pstmt.setInt(1, cliente.getCodigo());
+
+            ResultSet rs = pstmt.executeQuery();
+            List<Endereco> lista = new ArrayList<>();
+            
+            while (rs.next()) {
+                Endereco end = new Endereco();
+                
+                end.setCodigo(rs.getInt("codigo"));
+                end.setLogradouro(rs.getString("logradouro"));
+                end.setComplemento(rs.getString("complemento"));
+                end.setBairro(rs.getString("bairro"));
+                end.setCidade(new Cidade(rs.getInt("cidade")));
+                end.setPadrao(rs.getBoolean("padrao"));
+//                end.setCliente(new Cliente(rs.getInt("cliente")));
+
+                lista.add(end);
+            }
+            
+            return lista;
+        } catch (SQLException ex) {
+            Logger.getLogger(EnderecoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DatabaseException(ex, "Erro ao listar os endereços do Cliente");
+        }
+    }
 }
