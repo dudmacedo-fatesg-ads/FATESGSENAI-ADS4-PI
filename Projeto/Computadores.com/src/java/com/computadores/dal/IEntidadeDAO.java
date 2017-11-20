@@ -14,7 +14,7 @@ public interface IEntidadeDAO<T> {
 
     public void create(T obj) throws DatabaseException;
 
-    public T retrieve(Object key) throws DatabaseException;
+    public T retrieve(int key) throws DatabaseException;
 
     public void update(T obj) throws DatabaseException;
 
