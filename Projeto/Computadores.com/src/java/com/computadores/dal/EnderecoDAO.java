@@ -113,7 +113,7 @@ public class EnderecoDAO implements IEntidadeDAO<Endereco> {
     }
 
     @Override
-    public List<Endereco> getAll() throws DatabaseException {
+    public List<Endereco> list() throws DatabaseException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -124,7 +124,7 @@ public class EnderecoDAO implements IEntidadeDAO<Endereco> {
      * @return Retorna os endereços cadastrados de um determinado Cliente
      * @throws com.computadores.error.DatabaseException
      */
-    public List<Endereco> getAll(Cliente cliente) throws DatabaseException {
+    public List<Endereco> list(Cliente cliente) throws DatabaseException {
         String sql = String.format(
                 "SELECT * FROM %s WHERE cliente = ?",
                 getTabela());
