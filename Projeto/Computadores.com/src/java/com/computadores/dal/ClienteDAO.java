@@ -221,7 +221,7 @@ public class ClienteDAO implements IEntidadeDAO<Cliente> {
             // **/--/**
             //
 
-            pstmt.setLong(1, obj.getCodigo());
+            pstmt.setInt(1, obj.getCodigo());
 
             pstmt.execute();
         } catch (SQLException ex) {
