@@ -155,12 +155,28 @@ public class ClienteDAO implements IEntidadeDAO<Cliente> {
 
     @Override
     public void update(Cliente obj) throws DatabaseException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
     public void delete(Cliente obj) throws DatabaseException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = String.format(
+                "DELETE FROM %s "
+                + "WHERE codigo = ?", getTabela());
+
+        try (PreparedStatement pstmt = cnx.prepareStatement(sql)) {
+            // Falta implementar a exclusão dos endereços
+            // Não vai funcionar se o cliente tiver endereço cadastrado
+            // **/--/**
+            //
+            
+            pstmt.setLong(1, obj.getCodigo());
+
+            pstmt.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DatabaseException(ex, "Erro ao excluir registro");
+        }
     }
 
     @Override
