@@ -12,6 +12,14 @@ public class Estado {
     private String nome;
     private String sigla;
     private List<Cidade> cidades;
+    
+    public Estado() {
+        
+    }
+    
+    public Estado(int codigo) {
+        this.codigo = codigo;
+    }
 
     public int getCodigo() {
         return codigo;

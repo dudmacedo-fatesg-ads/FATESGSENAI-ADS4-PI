@@ -2,6 +2,7 @@ package com.computadores.dal;
 
 import com.computadores.error.DatabaseException;
 import com.computadores.model.Cliente;
+import com.computadores.model.Estado;
 import com.computadores.model.PessoaFisica;
 import com.computadores.model.PessoaJuridica;
 import com.computadores.model.TipoPessoa;
@@ -84,6 +85,10 @@ public class ClienteDAO implements IEntidadeDAO<Cliente> {
 
             if (rs.next()) {
                 obj.setCodigo(rs.getInt("codigo"));
+
+                // Falta implementar o carregamento dos endereços
+                // **/--/**
+                //
             }
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -92,8 +97,60 @@ public class ClienteDAO implements IEntidadeDAO<Cliente> {
     }
 
     @Override
-    public Cliente retrieve(Object key) throws DatabaseException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Cliente retrieve(int key) throws DatabaseException {
+        String sql = String.format("SELECT * FROM %s WHERE codigo = ?", getTabela());
+
+        try (PreparedStatement pstmt = cnx.prepareStatement(sql)) {
+            pstmt.setLong(1, key);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                TipoPessoa tipo = TipoPessoa.getById(rs.getString("tipo"));
+                Cliente ret = null;
+                if (tipo == TipoPessoa.FISICA) {
+                    PessoaFisica cli = new PessoaFisica();
+                    cli.setCodigo(key);
+                    cli.setTipo(TipoPessoa.FISICA);
+                    cli.setCpf(rs.getLong("cpf"));
+                    cli.setRg(rs.getInt("rg"));
+                    cli.setNome(rs.getString("nome"));
+                    cli.setDtNasc(rs.getDate("dtnasc"));
+                    ret = cli;
+                } else if (tipo == TipoPessoa.JURIDICA) {
+                    PessoaJuridica cli = new PessoaJuridica();
+                    cli.setCodigo(key);
+                    cli.setTipo(TipoPessoa.JURIDICA);
+                    cli.setCnpj(rs.getLong("cnpj"));
+                    String ie = rs.getString("ie");
+                    if (ie != null) {
+                        cli.setInscricaoestadual(ie);
+                        cli.setEstadoemissor(new Estado(rs.getInt("ie_estadoemissor")));
+                    }
+                    cli.setRazaoSocial(rs.getString("razaosocial"));
+                    ret = cli;
+                }
+
+                // Falta implementar o carregamento dos endereços
+                // **/--/**
+                //
+                if (ret != null) {
+                    ret.setTelresidencial(rs.getString("telresidencial"));
+                    ret.setTelcomercial(rs.getString("telcomercial"));
+                    ret.setTelcelular(rs.getString("telcelular"));
+                    ret.setEmail(rs.getString("email"));
+                    ret.setSenha(rs.getString("senha"));
+                    ret.setAdministrador(rs.getBoolean("administrador"));
+                }
+
+                return ret;
+            } else {
+                throw new DatabaseException(null, "Não existe nenhum registro com a chave informada");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DatabaseException(ex, "Erro ao recuperar registro");
+        }
     }
 
     @Override

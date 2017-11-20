@@ -16,11 +16,11 @@ public enum TipoPessoa {
         this.descricao = descricao;
     }
 
-    public static TipoPessoa getById(char id) {
+    public static TipoPessoa getById(String id) {
         switch (id) {
-            case 'F':
+            case "F":
                 return FISICA;
-            case 'J':
+            case "J":
                 return JURIDICA;
             default:
                 return null;
