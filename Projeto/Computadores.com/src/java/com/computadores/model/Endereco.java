@@ -45,7 +45,7 @@ public class Endereco implements IEntidade {
         return true;
     }
 
-    public int getCodigo() {
+    public Integer getCodigo() {
         return codigo;
     }
 
@@ -53,7 +53,7 @@ public class Endereco implements IEntidade {
         this.codigo = codigo;
     }
 
-    public int getCep() {
+    public Integer getCep() {
         return cep;
     }
 

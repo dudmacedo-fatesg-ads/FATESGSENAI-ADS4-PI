@@ -66,7 +66,33 @@ public class EnderecoDAO implements IEntidadeDAO<Endereco> {
 
     @Override
     public void update(Endereco obj) throws DatabaseException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (!obj.validar() || obj.getCodigo() == null || obj.getCodigo() <= 0) {
+            throw new DatabaseException(null, "O endereço informado não é válido");
+        }
+
+        String sql = String.format(
+                "UPDATE %s SET "
+                + "(cep, logradouro, complemento, bairro, cidade, padrao, cliente) = "
+                + "(?, ?, ?, ?, ?, ?, ?) WHERE codigo = ?",
+                getTabela());
+
+        try (PreparedStatement pstmt = cnx.prepareStatement(sql)) {
+            pstmt.setInt(1, obj.getCep());
+            pstmt.setString(2, obj.getLogradouro());
+            pstmt.setString(3, obj.getComplemento());
+            pstmt.setString(4, obj.getBairro());
+            pstmt.setInt(5, obj.getCidade().getCodigo());
+            pstmt.setBoolean(6, obj.isPadrao());
+            pstmt.setInt(7, obj.getCliente().getCodigo());
+
+            pstmt.setInt(8, obj.getCodigo());
+
+            // Executa a operação
+            pstmt.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(EnderecoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DatabaseException(ex, "Erro ao atualizar registro");
+        }
     }
 
     @Override
@@ -96,10 +122,10 @@ public class EnderecoDAO implements IEntidadeDAO<Endereco> {
 
             ResultSet rs = pstmt.executeQuery();
             List<Endereco> lista = new ArrayList<>();
-            
+
             while (rs.next()) {
                 Endereco end = new Endereco();
-                
+
                 end.setCodigo(rs.getInt("codigo"));
                 end.setLogradouro(rs.getString("logradouro"));
                 end.setComplemento(rs.getString("complemento"));
@@ -110,7 +136,7 @@ public class EnderecoDAO implements IEntidadeDAO<Endereco> {
 
                 lista.add(end);
             }
-            
+
             return lista;
         } catch (SQLException ex) {
             Logger.getLogger(EnderecoDAO.class.getName()).log(Level.SEVERE, null, ex);
