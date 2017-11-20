@@ -10,6 +10,14 @@ public class PessoaJuridica extends Cliente {
     private String inscricaoestadual;
     private Estado estadoemissor;
     private String razaoSocial;
+    
+    public PessoaJuridica() {
+        super(TipoPessoa.JURIDICA);
+    }
+    
+    public PessoaJuridica(int codigo) {
+        super(codigo, TipoPessoa.JURIDICA);
+    }
 
     @Override
     public boolean validar() {

@@ -12,6 +12,14 @@ public class PessoaFisica extends Cliente {
     private int rg;
     private String nome;
     private Date dtNasc;
+    
+    public PessoaFisica() {
+        super(TipoPessoa.FISICA);
+    }
+    
+    public PessoaFisica(int codigo) {
+        super(codigo, TipoPessoa.FISICA);
+    }
 
     @Override
     public boolean validar() {
