@@ -13,6 +13,7 @@ public class Endereco implements IEntidade {
     private String bairro;
     private Cidade cidade;
     private Boolean padrao = false;
+    private Cliente cliente;
 
     @Override
     public boolean validar() {
@@ -34,6 +35,10 @@ public class Endereco implements IEntidade {
         } //
         // Valida o campo Cidade
         else if (cidade == null) {
+            return false;
+        } //
+        // Valida a existência do Cliente
+        else if (cliente == null || cliente.getCodigo() <= 0) {
             return false;
         }
 
@@ -94,6 +99,14 @@ public class Endereco implements IEntidade {
 
     public void setPadrao(boolean padrao) {
         this.padrao = padrao;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
 }
