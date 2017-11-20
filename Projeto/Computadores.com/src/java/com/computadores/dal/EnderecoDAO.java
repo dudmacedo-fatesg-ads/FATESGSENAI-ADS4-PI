@@ -97,7 +97,19 @@ public class EnderecoDAO implements IEntidadeDAO<Endereco> {
 
     @Override
     public void delete(Endereco obj) throws DatabaseException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = String.format(
+                "DELETE FROM %s "
+                + "WHERE codigo = ?", getTabela());
+
+        try (PreparedStatement pstmt = cnx.prepareStatement(sql)) {
+
+            pstmt.setInt(1, obj.getCodigo());
+
+            pstmt.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(EnderecoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DatabaseException(ex, "Erro ao excluir registro");
+        }
     }
 
     @Override
