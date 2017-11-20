@@ -4,6 +4,7 @@ import com.computadores.error.DatabaseException;
 import com.computadores.model.Cidade;
 import com.computadores.model.Cliente;
 import com.computadores.model.Endereco;
+import com.computadores.model.Estado;
 import com.computadores.util.DBFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -62,6 +63,43 @@ public class EnderecoDAO implements IEntidadeDAO<Endereco> {
     @Override
     public Endereco retrieve(int key) throws DatabaseException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Endereco retrieveByCEP(int cep) throws DatabaseException {
+        String sql = "SELECT "
+                + "l.cep AS cep, l.logr AS logradouro, b.nome AS bairro, "
+                + "c.codigo AS cod_cidade, c.nome AS cidade, "
+                + "e.codigo AS cod_estado, e.nome AS estado "
+                + "FROM end_logradouro l "
+                + "INNER JOIN end_bairro b ON l.bairro = b.codigo "
+                + "INNER JOIN end_cidade c ON b.cidade = c.codigo "
+                + "INNER JOIN end_estado e ON c.estado = e.codigo "
+                + "WHERE l.cep = ?";
+
+        try (PreparedStatement stmt = cnx.prepareStatement(sql)) {
+            stmt.setInt(1, cep);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                Endereco ret = new Endereco();
+
+                ret.setCep(rs.getInt("cep"));
+                ret.setLogradouro(rs.getString("logradouro"));
+                ret.setBairro(rs.getString("bairro"));
+                ret.setCidade(
+                        new Cidade(rs.getInt("cod_cidade"), rs.getString("cidade"),
+                                new Estado(rs.getInt("cod_estado"), rs.getString("estado")))
+                );
+
+                return ret;
+            } else {
+                return null;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EnderecoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DatabaseException(null, "Erro ao consultar CEP");
+        }
     }
 
     @Override
