@@ -20,6 +20,11 @@ public class Estado {
     public Estado(int codigo) {
         this.codigo = codigo;
     }
+    
+    public Estado(int codigo, String nome) {
+        this.codigo = codigo;
+        this.nome = nome;
+    }
 
     public int getCodigo() {
         return codigo;

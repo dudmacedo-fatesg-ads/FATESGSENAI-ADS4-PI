@@ -18,6 +18,12 @@ public class Cidade {
         this.codigo = codigo;
     }
 
+    public Cidade(int codigo, String nome, Estado estado) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.estado = estado;
+    }
+
     public int getCodigo() {
         return codigo;
     }
