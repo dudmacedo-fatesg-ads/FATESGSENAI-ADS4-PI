@@ -7,6 +7,7 @@ import com.computadores.model.PessoaFisica;
 import com.computadores.model.PessoaJuridica;
 import com.computadores.model.TipoPessoa;
 import com.computadores.util.DBFactory;
+import com.computadores.util.Hash;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -152,6 +153,27 @@ public class ClienteDAO implements IEntidadeDAO<Cliente> {
         }
     }
 
+    public Cliente retrieveLogin(String login, String senha) throws DatabaseException {
+        String sql = String.format("SELECT codigo, senha FROM %s WHERE email = ?", getTabela());
+
+        try (PreparedStatement pstmt = cnx.prepareStatement(sql)) {
+            pstmt.setString(1, login);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                String senha_banco = rs.getString("senha");
+
+                if (Hash.validar(senha, senha_banco, Hash.BCRYPT)) {
+                    return retrieve(rs.getInt("codigo"));
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     @Override
     public void update(Cliente obj) throws DatabaseException {
         // Auxílio para definir os campos do Query que fará o Update
@@ -198,7 +220,7 @@ public class ClienteDAO implements IEntidadeDAO<Cliente> {
             pstmt.setString(7, obj.getEmail());
             pstmt.setString(8, obj.getSenha());
             pstmt.setBoolean(9, obj.isAdministrador());
-            
+
             pstmt.setInt(10, obj.getCodigo());
 
             // Executa operação
