@@ -14,6 +14,14 @@ public class Endereco implements IEntidade {
     private Cidade cidade;
     private Boolean padrao = false;
     private Cliente cliente;
+    
+    public Endereco() {
+        
+    }
+    
+    public Endereco(int codigo) {
+        this.codigo = codigo;
+    }
 
     @Override
     public boolean validar() {

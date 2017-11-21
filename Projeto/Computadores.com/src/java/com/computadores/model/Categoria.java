@@ -10,6 +10,14 @@ public class Categoria implements IEntidade {
     private String nome;
     private Categoria categoria;
 
+    public Categoria() {
+
+    }
+
+    public Categoria(int codigo) {
+        this.codigo = codigo;
+    }
+
     @Override
     public boolean validar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

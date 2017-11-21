@@ -8,6 +8,14 @@ public class Marca implements IEntidade {
 
     private int codigo;
     private String nome;
+    
+    public Marca() {
+        
+    }
+    
+    public Marca(int codigo) {
+        this.codigo = codigo;
+    }
 
     @Override
     public boolean validar() {

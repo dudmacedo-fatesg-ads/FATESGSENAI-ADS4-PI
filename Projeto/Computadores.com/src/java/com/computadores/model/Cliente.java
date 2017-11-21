@@ -18,6 +18,15 @@ public abstract class Cliente implements IEntidade {
     private List<Endereco> enderecos;
     private boolean administrador;
 
+    protected Cliente(TipoPessoa tipo) {
+        this.tipo = tipo;
+    }
+
+    public Cliente(int codigo, TipoPessoa tipo) {
+        this.codigo = codigo;
+        this.tipo = tipo;
+    }
+
     public int getCodigo() {
         return codigo;
     }

@@ -18,6 +18,14 @@ public class Produto implements IEntidade {
     private boolean personalizavel;
     private int status;
 
+    public Produto() {
+
+    }
+
+    public Produto(int codigo) {
+        this.codigo = codigo;
+    }
+
     @Override
     public boolean validar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
