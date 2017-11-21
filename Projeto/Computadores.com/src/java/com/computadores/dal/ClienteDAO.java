@@ -2,6 +2,7 @@ package com.computadores.dal;
 
 import com.computadores.error.DatabaseException;
 import com.computadores.model.Cliente;
+import com.computadores.model.Endereco;
 import com.computadores.model.Estado;
 import com.computadores.model.PessoaFisica;
 import com.computadores.model.PessoaJuridica;
@@ -86,9 +87,15 @@ public class ClienteDAO implements IEntidadeDAO<Cliente> {
             if (rs.next()) {
                 obj.setCodigo(rs.getInt("codigo"));
 
-                // Falta implementar o carregamento dos endereços
-                // **/--/**
-                //
+                // Cadastrando endereços
+                if (obj.getEnderecos() != null) {
+                    EnderecoDAO end_dao = new EnderecoDAO();
+                    for (Endereco end : obj.getEnderecos()) {
+                        end.setCliente(obj);
+                        end_dao.create(end);
+                    }
+                }
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -131,10 +138,9 @@ public class ClienteDAO implements IEntidadeDAO<Cliente> {
                     ret = cli;
                 }
 
-                // Falta implementar o carregamento dos endereços
-                // **/--/**
-                //
                 if (ret != null) {
+                    ret.setEnderecos(new EnderecoDAO().list(ret));
+
                     ret.setTelresidencial(rs.getString("telresidencial"));
                     ret.setTelcomercial(rs.getString("telcomercial"));
                     ret.setTelcelular(rs.getString("telcelular"));
@@ -238,12 +244,10 @@ public class ClienteDAO implements IEntidadeDAO<Cliente> {
                 + "WHERE codigo = ?", getTabela());
 
         try (PreparedStatement pstmt = cnx.prepareStatement(sql)) {
-            // Falta implementar a exclusão dos endereços
-            // Não vai funcionar se o cliente tiver endereço cadastrado
-            // **/--/**
-            //
+            new EnderecoDAO().deleteByCliente(obj);
 
             pstmt.setInt(1, obj.getCodigo());
+            System.out.println(pstmt.toString());
 
             pstmt.execute();
         } catch (SQLException ex) {

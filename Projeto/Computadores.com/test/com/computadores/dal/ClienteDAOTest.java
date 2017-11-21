@@ -1,18 +1,19 @@
 package com.computadores.dal;
 
+import com.computadores.error.DatabaseException;
+import com.computadores.model.Cidade;
 import com.computadores.model.Cliente;
+import com.computadores.model.Endereco;
+import com.computadores.model.Estado;
 import com.computadores.model.PessoaFisica;
 import com.computadores.model.PessoaJuridica;
 import com.computadores.model.TipoPessoa;
 import com.computadores.util.Hash;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -43,6 +44,32 @@ public class ClienteDAOTest {
         pf.setSenha(Hash.getHash(Hash.getHash("8sdff08asud", Hash.MD5), Hash.BCRYPT));
         pf.setAdministrador(false);
         
+        ArrayList<Endereco> enderecos = new ArrayList<>();
+        
+        Endereco end = new Endereco();
+        
+        end.setCep(74610090);
+        end.setLogradouro("Rua 225");
+        end.setComplemento("Nº 555");
+        end.setBairro("Setor Leste Universitário");
+        end.setCidade(new Cidade(2174));
+        end.setPadrao(false);
+        
+        enderecos.add(end);
+        
+        end = new Endereco();
+        
+        end.setCep(74785472);
+        end.setLogradouro("Rua SR 31");
+        end.setComplemento("Quadra 41 Lote 17");
+        end.setBairro("Setor Recanto das Minas Gerais");
+        end.setCidade(new Cidade(2174));
+        end.setPadrao(true);
+        
+        enderecos.add(end);
+        
+        pf.setEnderecos(enderecos);
+        
         // Criando Cliente Pessoa Jurídica
         pj = new PessoaJuridica();
 
@@ -54,11 +81,13 @@ public class ClienteDAOTest {
         pj.setEmail("invictos@gmail.com");
         pj.setSenha(Hash.getHash(Hash.getHash("8sdff08asud", Hash.MD5), Hash.BCRYPT));
         pj.setAdministrador(false);
-        
+
     }
 
     /**
-     * TC01 - Método Create - Inserir PF
+     * TC01 - Método Create e Delete - PF
+     *
+     * @throws java.lang.Exception
      */
     @Test
     public void TC01() throws Exception {
@@ -68,10 +97,14 @@ public class ClienteDAOTest {
         if (pf.getCodigo() <= 0) {
             fail("Houve erro ao tentar inserir registro.");
         }
+
+        dao.delete(pf);
     }
 
     /**
-     * TC02 - Método Create - Inserir PJ
+     * TC02 - Método Create e Delete - PJ
+     *
+     * @throws java.lang.Exception
      */
     @Test
     public void TC02() throws Exception {
@@ -81,8 +114,10 @@ public class ClienteDAOTest {
         if (pj.getCodigo() <= 0) {
             fail("Houve erro ao tentar inserir registro.");
         }
-    }
 
+        dao.delete(pj);
+    }
+    
     /**
      * Test of retrieve method, of class ClienteDAO.
      */

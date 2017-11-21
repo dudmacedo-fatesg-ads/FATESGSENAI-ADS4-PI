@@ -150,6 +150,18 @@ public class EnderecoDAO implements IEntidadeDAO<Endereco> {
         }
     }
 
+    public void deleteByCliente(Cliente cli) throws DatabaseException {
+        String sql = String.format("DELETE FROM %s WHERE cliente = ?", getTabela());
+
+        try (PreparedStatement pstmt = cnx.prepareStatement(sql)) {
+            pstmt.setInt(1, cli.getCodigo());
+
+            pstmt.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(EnderecoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     @Override
     public List<Endereco> list() throws DatabaseException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
