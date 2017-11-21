@@ -33,8 +33,10 @@ public class ApoioEnderecoServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String cep = request.getParameter("cep");
+
         String retorno = "";
+        
+        String cep = request.getParameter("cep");
         if (cep != null) {
             int valor_cep = Integer.parseInt(cep.replace("-", ""));
             Endereco end = null;
@@ -47,13 +49,13 @@ public class ApoioEnderecoServlet extends HttpServlet {
 
             if (end != null) {
                 retorno = String.format(
-                        "endereco {"
-                                + "cep : %s,"
-                                + "logradouro : %s,"
-                                + "cidade : %s,"
-                                + "estado : %s"
-                                + "}",
-                        end.getCep(),
+                        "{ \"endereco\" {"
+                        + "\"cep\" : \"%s\","
+                        + "\"logradouro\" : \"%s\","
+                        + "\"cidade\" : %d,"
+                        + "\"estado\" : %d"
+                        + "} }",
+                        String.format("%05d-%03d", end.getCep() / 1000, end.getCep() % 1000),
                         end.getLogradouro(),
                         end.getCidade().getCodigo(),
                         end.getCidade().getEstado().getCodigo()
@@ -61,7 +63,6 @@ public class ApoioEnderecoServlet extends HttpServlet {
             } else {
                 retorno = "NULL";
             }
-
         }
 
         response.setContentType("text/html;charset=UTF-8");
