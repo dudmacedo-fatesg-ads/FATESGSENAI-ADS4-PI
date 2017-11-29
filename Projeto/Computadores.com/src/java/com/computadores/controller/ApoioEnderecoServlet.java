@@ -1,10 +1,14 @@
 package com.computadores.controller;
 
+import com.computadores.dal.CidadeDAO;
 import com.computadores.dal.EnderecoDAO;
 import com.computadores.error.DatabaseException;
+import com.computadores.model.Cidade;
 import com.computadores.model.Endereco;
+import com.computadores.model.Estado;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -33,12 +37,12 @@ public class ApoioEnderecoServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
 
         String retorno = "";
-        
-        String cep = request.getParameter("cep");
-        if (cep != null) {
-            int valor_cep = Integer.parseInt(cep.replace("-", ""));
+
+        if (request.getParameter("cep") != null) {
+            int valor_cep = Integer.parseInt(request.getParameter("cep").replace("-", ""));
             Endereco end = null;
 
             try {
@@ -63,21 +67,23 @@ public class ApoioEnderecoServlet extends HttpServlet {
             } else {
                 retorno = "NULL";
             }
+        } else if (request.getParameter("estado") != null) {
+            try {
+                CidadeDAO cid_dao = new CidadeDAO();
+                Iterator<Cidade> cidades = cid_dao
+                        .listCidades(new Estado(Integer.parseInt(request.getParameter("estado"))));
+
+                while (cidades.hasNext()) {
+                    Cidade cid = cidades.next();
+                    retorno += String.format("<option value=\"%d\">%s</option>", cid.getCodigo(), cid.getNome());
+                }
+            } catch (DatabaseException ex) {
+                Logger.getLogger(ApoioEnderecoServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
-        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             out.println(retorno);
-            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet ApoioEndereco</title>");
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet ApoioEndereco at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
         }
     }
 

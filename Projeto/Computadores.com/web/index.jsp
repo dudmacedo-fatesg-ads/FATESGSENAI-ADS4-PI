@@ -1,34 +1,33 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<!DOCTYPE html5>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link type="text/css" href="media/css/estilos.css" rel="stylesheet" />
         <link type="text/css" href="media/css/slick.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script type="text/javascript" src="<%=request.getContextPath()%>/media/js/jquery.js"></script>
-        <script type="text/javascript" src="<%=request.getContextPath()%>/media/js/slick.js"></script>
-        <script type="text/javascript" src="<%=request.getContextPath()%>/media/js/index.js"></script>
-        <title>Home</title>
+        <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+        <script type="text/javascript" src="media/js/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="media/js/jquery.maskedinput.min.js"></script>
+        <script type="text/javascript" src="media/js/slick.js"></script>
+        <script type="text/javascript" src="media/js/index.js"></script>
+        <title>Computadores.com - A sua loja on-line de informática</title>
     </head>
     <body>
         <jsp:include page="topo.jsp" />
-        <div class="banner">
-                    <ul class="lista_banner">
-                        <li class="lista_item">
-                            <img src="media/imagens/um.png">
-                        </li>
-                        <li class="lista_item">
-                            <img src="media/imagens/dois.png">
-                        </li>
-                        <li class="lista_item">
-                            <img src="media/imagens/image.jpg">
-                        </li>
-                    </ul><!-- lista banner -->
-                </div><!-- banner -->
-        
+
+        <% if (request.getParameter("p") == null || request.getParameter("p").equalsIgnoreCase("home")) { %>
+        <%@include file = "pages/home.jsp" %>
+        <%} else if (request.getParameter("p").equalsIgnoreCase("login")) { %>
+        <%@include file = "pages/formularioAcesso.jsp" %>
+        <%} else if (request.getParameter("p").equalsIgnoreCase("editCliente")) { %>
+        <%@include file = "pages/editCliente.jsp" %>
+        <%}%>
+
         <h1></h1>
-        
+
         <jsp:include page="rodape.jsp" />
     </body>
 </html>

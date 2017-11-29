@@ -8,7 +8,7 @@ public class Categoria implements IEntidade {
 
     private int codigo;
     private String nome;
-    private Categoria categoria;
+    private Categoria pai;
 
     public Categoria() {
 
@@ -39,11 +39,11 @@ public class Categoria implements IEntidade {
         this.nome = nome;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public Categoria getPai() {
+        return pai;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setPai(Categoria pai) {
+        this.pai = pai;
     }
 }

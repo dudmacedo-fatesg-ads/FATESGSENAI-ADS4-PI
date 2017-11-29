@@ -25,6 +25,12 @@ public class Estado {
         this.codigo = codigo;
         this.nome = nome;
     }
+    
+    public Estado(int codigo, String nome, String sigla) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.sigla = sigla;
+    }
 
     public int getCodigo() {
         return codigo;

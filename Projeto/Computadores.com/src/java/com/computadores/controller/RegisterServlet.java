@@ -1,15 +1,14 @@
 package com.computadores.controller;
 
-import com.computadores.dal.ClienteDAO;
+import com.computadores.Config;
+import com.computadores.dal.CidadeDAO;
+import com.computadores.dal.EnderecoDAO;
 import com.computadores.error.DatabaseException;
-import com.computadores.model.Cliente;
-import com.computadores.model.PessoaFisica;
-import com.computadores.model.PessoaJuridica;
-import com.computadores.model.TipoPessoa;
-import com.computadores.util.Hash;
+import com.computadores.model.Cidade;
+import com.computadores.model.Endereco;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Scanner;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -18,16 +17,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author eduardo
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet", "/Login.do"})
-public class LoginServlet extends HttpServlet {
-
-    ClienteDAO dao = new ClienteDAO();
+@WebServlet(name = "Register.do", urlPatterns = {"/Register.do"})
+public class RegisterServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,39 +37,36 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        if (request.getParameter("acao") == null) {
-            RequestDispatcher view = request.getRequestDispatcher("?p=login");
-            view.forward(request, response);
-        } else if (request.getParameter("acao").equals("login")) {
-            // email = E-mail do usuário (login)
-            String email = request.getParameter("usuarioEmail");
-            // senha = senha do usuário. Deverá ser recebido aqui o hash MD5 da senha do usuário
-            String senha = request.getParameter("usuarioSenha");
-            // Só pra teste
-            senha = Hash.getHash(senha, Hash.MD5);
-
-            try {
-                Cliente cli = dao.retrieveLogin(email, senha);
-                if (cli != null) {
-                    HttpSession session = request.getSession();
-
-                    session.setAttribute("usuarioCodigo", cli.getCodigo());
-                    if (cli.getTipo() == TipoPessoa.FISICA) {
-                        session.setAttribute("usuarioNome", new Scanner(((PessoaFisica) cli).getNome()).next());
-                    } else if (cli.getTipo() == TipoPessoa.JURIDICA) {
-                        session.setAttribute("usuarioNome", new Scanner(((PessoaJuridica) cli).getRazaoSocial()).next());
-                    }
+        if (request.getParameter("acao") != null) {
+            if (request.getParameter("acao").equals("novoregistro")) {
+                request.setAttribute("clienteEmail", request.getParameter("usuarioEmail"));
+                
+                // Tenta converter o CEP
+                int cep = 0;
+                try {
+                    cep = Integer.parseInt(request.getParameter("usuarioCEP").replaceAll("-", ""));
+                } catch (NumberFormatException ex) {
+                    Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (DatabaseException ex) {
-                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                RequestDispatcher view = request.getRequestDispatcher("?p=home");
+                
+                try {
+                    EnderecoDAO end_dao = new EnderecoDAO();
+                    Endereco pre_endereco = end_dao.retrieveByCEP(cep);
+                    request.setAttribute("pre_endereco", pre_endereco);
+                    request.setAttribute("estados", Config.getEstados());
+                    
+                    CidadeDAO cid_dao = new CidadeDAO();
+                    Iterator<Cidade> cidades = cid_dao.listCidades(pre_endereco.getCidade().getEstado());
+                    request.setAttribute("cidades", cidades);
+                } catch (DatabaseException ex) {
+                    Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                RequestDispatcher view = request.getRequestDispatcher("?p=editCliente");
                 view.forward(request, response);
             }
-        } else if (request.getParameter("acao").equals("logout")) {
-            HttpSession session = request.getSession();
-            session.invalidate();
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

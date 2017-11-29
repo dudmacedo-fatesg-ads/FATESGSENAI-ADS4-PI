@@ -22,6 +22,9 @@
                     <label>Nome do Produto</label>
                     <input name="" type="" value="" placeholder="Nome do Produto"/>
                     
+                    <label>Descrição</label>
+                    <textarea rows="180" cols="180"></textarea>
+                    
                     <label>Categoria</label>
                     <select>
                         <option value="1">Computador</option>
@@ -32,7 +35,7 @@
                         <option value="6">Outros Produtos</option>
                     </select>
                     
-                    <label>Fábricante</label>
+                    <label>Marca</label>
                     <select>
                         <option value="1">Dell</option>
                         <option value="2">Apple</option>
@@ -42,8 +45,25 @@
                         <option value="6">AMD</option>
                     </select>    
                     
-                    <label>Preço</label>
+                    <label>Quantidade</label>
+                    <input name="quantidadeproduto" type="" value="" placeholder="informe a quantidade do produto"/>
+                    
+                    
+                    <label>Valor</label>
                     <input name="" type="" placeholder="valor do produto"/>
+                    
+                    <label>Produto Personalizável?</label>
+                    <input type="radio" name="produtopersonalizar" value="true"> Sim<br>
+                    <input type="radio" name="produtopersonalizar" value="false"> Não<br>
+                    
+                    <label>Status do produto</label>
+                    <input type="radio" name="produtostatus" value="emestoque"> Em estoque<br>
+                    <input type="radio" name="produtostatus" value="semestoque"> Sem estoque<br>
+                    <input type="radio" name="produtostatus" value="acabandoestoque"> Acabando estoque<br>
+                    
+                    <button type="button" onclick="alert('Produto salvo!')">Salvar</button>
+                    <button>Cancelar</button>
+                    <button type="button" onclick="alert('Campos Limpos!')">Limpar</button>
                 </fieldset>
             </form>
         </div>

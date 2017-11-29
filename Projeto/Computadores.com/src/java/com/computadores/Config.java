@@ -1,8 +1,12 @@
 package com.computadores;
 
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
-import java.io.File;
+import com.computadores.dal.EstadoDAO;
+import com.computadores.error.DatabaseException;
+import com.computadores.model.Estado;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -10,65 +14,42 @@ import java.io.File;
  */
 public class Config {
 
-    private static final Config CONFIG = new Config();
+    // Recursos para acesso ao Banco de Dados
+    private static String BANCO_DRIVER = "org.postgresql.Driver";
+    private static String BANCO_URL = "jdbc:postgresql://localhost:5432/computadores";
+    private static String BANCO_USER = "postgres";
+    private static String BANCO_PASS = "postgres";
+    
+    // Recursos de auxílio aos formulários
+    private static List<Estado> ESTADOS = null;
 
-    private final String banco_driver;
-    private final String banco_url;
-    private final String banco_user;
-    private final String banco_pass;
-
-    private Config() {
-        banco_driver = "org.postgresql.Driver";
-        banco_url = "jdbc:postgresql://localhost:5432/computadores";
-        banco_user = "postgres";
-        banco_pass = "postgres";
+    static {
+        try {
+            EstadoDAO dao = new EstadoDAO();
+            ESTADOS = dao.listAll();
+        } catch (DatabaseException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+            ESTADOS = null;
+        }
     }
 
-//    static {
-//        File arq = new File("configuracao.xml");
-//        if (arq.exists()) {
-//            CONFIG = fromXML(arq);
-//            System.out.println(arq.getAbsolutePath());
-//            System.out.println("Arquivo lido");
-//        } else {
-//            CONFIG = new Config();
-//            CONFIG.toXML(arq);
-//            System.out.println(arq.getAbsolutePath());
-//            System.out.println("Arquivo gravado");
-//        }
-//    }
-
     public static String getBancoDriver() {
-        return CONFIG.banco_driver;
+        return BANCO_DRIVER;
     }
 
     public static String getBancoURL() {
-        return CONFIG.banco_url;
+        return BANCO_URL;
     }
 
     public static String getBancoUser() {
-        return CONFIG.banco_user;
+        return BANCO_USER;
     }
 
     public static String getBancoPass() {
-        return CONFIG.banco_pass;
+        return BANCO_PASS;
     }
-
-//    private void toXML(File arq) {
-//        XStream stream = getXStream();
-//        stream.toXML(arq);
-//    }
-//
-//    private static Config fromXML(File arq) {
-//        XStream stream = getXStream();
-//        return (Config) stream.fromXML(arq);
-//    }
-//
-//    private static XStream getXStream() {
-//        XStream stream = new XStream(new DomDriver());
-//
-//        stream.alias("config", Config.class);
-//
-//        return stream;
-//    }
+    
+    public static Iterator<Estado> getEstados() {
+        return ESTADOS.iterator();
+    }
 }

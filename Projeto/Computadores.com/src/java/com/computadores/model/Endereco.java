@@ -68,6 +68,10 @@ public class Endereco implements IEntidade {
     public void setCep(int cep) {
         this.cep = cep;
     }
+    
+    public String getCepformatado() {
+        return String.format("%05d-%03d", cep / 1000, cep % 1000);
+    }
 
     public String getLogradouro() {
         return logradouro;
