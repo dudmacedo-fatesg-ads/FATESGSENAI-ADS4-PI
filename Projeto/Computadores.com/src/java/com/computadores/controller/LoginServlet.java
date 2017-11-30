@@ -8,7 +8,6 @@ import com.computadores.model.PessoaJuridica;
 import com.computadores.model.TipoPessoa;
 import com.computadores.util.Hash;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,10 +39,14 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String HOME_PAGE = "?p=home";
+        String LOGIN_PAGE = "?p=login";
+
         response.setContentType("text/html;charset=UTF-8");
         if (request.getParameter("acao") == null) {
-            RequestDispatcher view = request.getRequestDispatcher("?p=login");
+            RequestDispatcher view = request.getRequestDispatcher(LOGIN_PAGE);
             view.forward(request, response);
+
         } else if (request.getParameter("acao").equals("login")) {
             // email = E-mail do usuário (login)
             String email = request.getParameter("usuarioEmail");
@@ -63,16 +66,23 @@ public class LoginServlet extends HttpServlet {
                     } else if (cli.getTipo() == TipoPessoa.JURIDICA) {
                         session.setAttribute("usuarioNome", new Scanner(((PessoaJuridica) cli).getRazaoSocial()).next());
                     }
+
+                    RequestDispatcher view = request.getRequestDispatcher(HOME_PAGE);
+                    view.forward(request, response);
+                } else {
+                    request.setAttribute("msg", "Não foi encontrado nenhum usuário com esta combinação de e-mail e senha.");
+                    RequestDispatcher view = request.getRequestDispatcher(LOGIN_PAGE);
+                    view.forward(request, response);
                 }
             } catch (DatabaseException ex) {
                 Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                RequestDispatcher view = request.getRequestDispatcher("?p=home");
-                view.forward(request, response);
             }
         } else if (request.getParameter("acao").equals("logout")) {
             HttpSession session = request.getSession();
             session.invalidate();
+
+            RequestDispatcher view = request.getRequestDispatcher(HOME_PAGE);
+            view.forward(request, response);
         }
     }
 

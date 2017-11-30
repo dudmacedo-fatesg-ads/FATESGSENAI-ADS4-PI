@@ -53,14 +53,16 @@ public class ApoioEnderecoServlet extends HttpServlet {
 
             if (end != null) {
                 retorno = String.format(
-                        "{ \"endereco\" {"
-                        + "\"cep\" : \"%s\","
-                        + "\"logradouro\" : \"%s\","
-                        + "\"cidade\" : %d,"
-                        + "\"estado\" : %d"
-                        + "} }",
+                        "{"
+                        + "\"cep\":\"%s\","
+                        + "\"logradouro\":\"%s\","
+                        + "\"bairro\":\"%s\","
+                        + "\"cidade\":%d,"
+                        + "\"estado\":%d"
+                        + "}",
                         String.format("%05d-%03d", end.getCep() / 1000, end.getCep() % 1000),
                         end.getLogradouro(),
+                        end.getBairro(),
                         end.getCidade().getCodigo(),
                         end.getCidade().getEstado().getCodigo()
                 );

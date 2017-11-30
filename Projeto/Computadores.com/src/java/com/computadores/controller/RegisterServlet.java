@@ -2,9 +2,11 @@ package com.computadores.controller;
 
 import com.computadores.Config;
 import com.computadores.dal.CidadeDAO;
+import com.computadores.dal.ClienteDAO;
 import com.computadores.dal.EnderecoDAO;
 import com.computadores.error.DatabaseException;
 import com.computadores.model.Cidade;
+import com.computadores.model.Cliente;
 import com.computadores.model.Endereco;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,7 +42,7 @@ public class RegisterServlet extends HttpServlet {
         if (request.getParameter("acao") != null) {
             if (request.getParameter("acao").equals("novoregistro")) {
                 request.setAttribute("clienteEmail", request.getParameter("usuarioEmail"));
-                
+
                 // Tenta converter o CEP
                 int cep = 0;
                 try {
@@ -48,22 +50,45 @@ public class RegisterServlet extends HttpServlet {
                 } catch (NumberFormatException ex) {
                     Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
                 try {
                     EnderecoDAO end_dao = new EnderecoDAO();
                     Endereco pre_endereco = end_dao.retrieveByCEP(cep);
                     request.setAttribute("pre_endereco", pre_endereco);
                     request.setAttribute("estados", Config.getEstados());
-                    
+
                     CidadeDAO cid_dao = new CidadeDAO();
                     Iterator<Cidade> cidades = cid_dao.listCidades(pre_endereco.getCidade().getEstado());
                     request.setAttribute("cidades", cidades);
                 } catch (DatabaseException ex) {
                     Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
                 RequestDispatcher view = request.getRequestDispatcher("?p=editCliente");
                 view.forward(request, response);
+            } //
+            //
+            else if (request.getParameter("acao").equals("registrarcliente")) {
+                ClienteDAO cli_dao = new ClienteDAO();
+
+                String email = request.getParameter("clienteEmail");
+                String senha = request.getParameter("clienteHashSenha");
+
+//                response.sendRedirect("./");
+            }
+        } //
+        //
+        else if (request.getParameter("verifEmail") != null) {
+            try {
+
+                ClienteDAO cli_dao = new ClienteDAO();
+                boolean existe = (cli_dao.verificaEmail(request.getParameter("verifEmail")));
+
+                try (PrintWriter out = response.getWriter()) {
+                    out.println(existe);
+                }
+            } catch (DatabaseException ex) {
+                Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 

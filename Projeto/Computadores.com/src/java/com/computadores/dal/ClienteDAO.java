@@ -180,6 +180,23 @@ public class ClienteDAO implements IEntidadeDAO<Cliente> {
         return null;
     }
 
+    public boolean verificaEmail(String email) throws DatabaseException {
+        String sql = String.format("SELECT * FROM %s WHERE email = ?", getTabela());
+
+        try (PreparedStatement pstmt = cnx.prepareStatement(sql)) {
+            pstmt.setString(1, email);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
     @Override
     public void update(Cliente obj) throws DatabaseException {
         // Auxílio para definir os campos do Query que fará o Update

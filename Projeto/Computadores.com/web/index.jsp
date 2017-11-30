@@ -13,6 +13,7 @@
         <script type="text/javascript" src="media/js/jquery.maskedinput.min.js"></script>
         <script type="text/javascript" src="media/js/slick.js"></script>
         <script type="text/javascript" src="media/js/index.js"></script>
+        <script type="text/javascript" src="media/js/md5.js"></script>
         <title>Computadores.com - A sua loja on-line de informática</title>
     </head>
     <body>

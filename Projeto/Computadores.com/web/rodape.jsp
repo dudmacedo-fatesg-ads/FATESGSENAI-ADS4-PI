@@ -40,7 +40,7 @@
             
             <ul class="institucional">
                 <h2>Institucional</h2>
-                <li><a href="#">Quem Somos</a></li>
+                <li><a href="SobreNos">Quem Somos</a></li>
             </ul>
             
             <ul class="central">
@@ -52,8 +52,8 @@
         
         <div class="assinatura"> 
             <img src="media/imagens/logo/logoTransparente.png">
-            <p>&COPY; Desenvolvido por <a href="index">computadores.com</a></p>
-            <p>Enderenço: Avenidade Leblon, Qd. 147</p>
+            <p>&COPY; Desenvolvido por <a href="./">Computadores.com</a></p>
+            <p>Endereço: Avenidade Leblon, Qd. 147</p>
             <p>Telefone: 62 8317-8931</p>
             <p>CNPJ: 09.999.999/9999-99| GO</p>
         </div><!-- assinatura -->
