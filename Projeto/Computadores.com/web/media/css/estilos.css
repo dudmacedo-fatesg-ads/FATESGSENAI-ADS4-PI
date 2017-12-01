@@ -219,25 +219,35 @@ footer{}
                 .listagem table tbody tr td{color: #fff;width: 91px;font-family: 'Oswald', sans-serif;}
                     .listagem table tbody tr td a{color: #fff;background-color: #7b0000;padding: 0 20px;}
                     .listagem table tbody tr td a:hover{color: #000;background-color: #fff;}
+
                     
+/*PAGINA BASE*/
+#principal {font-family: 'Oswald', sans-serif;background-color: #000;align-items: center;}
+.conteudo {background-color: #fff;width: 80%;min-width: 1000px;height: 1000px;}
+.conteudo .menuLateral {margin-left: -15px;width: 20%; background-color: #000;display: inline-block;height: 100%;}
+.conteudo .menuLateral .lista {margin: 15px;}
+.conteudo .menuLateral ul.menuLista {color: #fff;}
+.conteudo .menuLateral ul.menuLista li {}
+.conteudo .menuLateral ul.menuLista li.N1 a{font-size: 18px;color: #fff;font-weight: bolder;}
+.conteudo .menuLateral ul.menuLista li.N1 a:hover{color: #7b0000;background-color: #fff;}
+.conteudo .menuLateral ul.menuLista li.N2 a{margin-left: 15px;color: #fff;}
+.conteudo .menuLateral ul.menuLista li.N2 a:hover{color: #7b0000;background-color: #fff;}
+
+.conteudo .paginaFuncao {background-color: #fff;float:right;width: 80%;display: inline-block;box-sizing: content-box;}
+.conteudo .paginaFuncao .funcao {margin: 15px;}
                     
 /*PRODUTOS HOME*/
-#produtos{font-family: 'Oswald', sans-serif;background-color: #000;padding-bottom: 2019px;}
-.paginaPrincipal{background-color: #000;}
-.paginaPrincipal .menuProdutos{width: 15%;float: left;}
-.paginaPrincipal .menuProdutos ul.menuLista{text-align: center;color: #fff;}
-.paginaPrincipal .menuProdutos ul.menuLista li{}
-.paginaPrincipal .menuProdutos ul.menuLista li label{font-size: 18px;font-weight: bolder;margin-right: 150px;}
-.paginaPrincipal .menuProdutos ul.menuLista li a{color: #fff;margin-right: 90px;}
-.paginaPrincipal .menuProdutos ul.menuLista li a:hover{color: #7b0000;background-color: #fff;}
+.conteudo .paginaFuncao .funcao ul.galeriaProduto {}
+.conteudo .paginaFuncao .funcao ul.galeriaProduto li {width: 30%;margin-left: 3%;margin-top: 40px;display: inline-block;}
+.conteudo .paginaFuncao .funcao ul.galeriaProduto li img{width: 30%; margin: 0 auto;}
+.conteudo .paginaFuncao .funcao ul.galeriaProduto li h3 {text-align: center;}
 
-.paginaPrincipal .listagemProdutos{float: right;width: 80%;padding-bottom: 86px;padding-left: 40px;background-color: #fff;}
-    .paginaPrincipal .listagemProdutos ul.galeriaProduto{}
-        .paginaPrincipal .listagemProdutos ul.galeriaProduto li{width: 40%;display: inline-block;color: #000;margin-top: 40px;}
-            .paginaPrincipal .listagemProdutos ul.galeriaProduto li img{width: 30%;margin: 0 auto;}
-            .paginaPrincipal .listagemProdutos ul.galeriaProduto li h3{width: 40%;margin-bottom: 20px;margin: 33px auto;text-align: center;}
-            .paginaPrincipal .listagemProdutos ul.galeriaProduto li a{color: #fff;background-color: #7b0000;padding: 10px 48px;margin: 131px;}
-            .paginaPrincipal .listagemProdutos ul.galeriaProduto li a:hover{color: #7b0000;background-color: #fff;}
+/*#teste .listagemProdutos ul.galeriaProduto{}
+#teste .listagemProdutos ul.galeriaProduto li{width: 40%;display: inline-block;color: #000;margin-top: 40px;}
+#teste .listagemProdutos ul.galeriaProduto li img{width: 30%;margin: 0 auto;}
+#teste .listagemProdutos ul.galeriaProduto li h3{width: 40%;margin-bottom: 20px;margin: 33px auto;text-align: center;}
+#teste .listagemProdutos ul.galeriaProduto li a{color: #fff;background-color: #7b0000;padding: 10px 48px;margin: 131px;}
+#teste .listagemProdutos ul.galeriaProduto li a:hover{color: #7b0000;background-color: #fff;}*/
             
             
             
