@@ -20,6 +20,7 @@ public class DBFactory {
     }
 
     public static Connection getConnection() {
+        System.out.println(Config.getBancoDriver());
         if (connection != null) {
             return connection;
         } else {
