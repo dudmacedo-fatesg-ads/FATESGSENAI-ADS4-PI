@@ -124,3 +124,4 @@
         </div>
     </div>
 </section>
+<script type="text/javascript" src="media/js/principal.js"></script>

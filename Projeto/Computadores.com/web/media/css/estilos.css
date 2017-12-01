@@ -223,8 +223,8 @@ footer{}
 
 /*PAGINA BASE*/
 #principal {font-family: 'Oswald', sans-serif;background-image: url("../../media/imagens/index/mainbackground.jpg");background-repeat: repeat-y;background-position: center;background-attachment: fixed;background-size: 100%;align-items: center;}
-.conteudo {background-color: #fff;width: 80%;min-width: 1000px;}
-.conteudo .menuLateral {margin-left: -15px;width: 20%; background-color: #000;display: inline-block;height: 100%;}
+.conteudo {background-color: #fff;width: 80%;min-width: 1000px;overflow:auto;}
+.conteudo .menuLateral {margin-left: -15px;width: 20%; background-color: #000;display: inline-block;height: 100%;overflow:auto;}
 .conteudo .menuLateral .lista {margin: 15px;}
 .conteudo .menuLateral ul.menuLista {color: #fff;}
 .conteudo .menuLateral ul.menuLista li {}
@@ -233,7 +233,7 @@ footer{}
 .conteudo .menuLateral ul.menuLista li.N2 a{margin-left: 15px;color: #fff;}
 .conteudo .menuLateral ul.menuLista li.N2 a:hover{color: #7b0000;background-color: #fff;}
 
-.conteudo .paginaFuncao {background-color: #fff;float:right;width: 80%;display: block;height: 100%;}
+.conteudo .paginaFuncao {background-color: #fff;float:right;width: 80%;display: block;height: 100%;overflow:auto;}
 .conteudo .paginaFuncao .funcao {margin: 15px;}
                     
 /*PRODUTOS HOME*/
