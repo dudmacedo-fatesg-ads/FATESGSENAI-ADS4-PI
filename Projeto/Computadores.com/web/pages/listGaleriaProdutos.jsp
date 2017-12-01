@@ -9,7 +9,8 @@
             <img src="media/imagens/computadores/case1.png">
             <h3>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos,
                 e vem sendo utilizado desde o século XVI</h3>
-            <a href="#">R$ 1.800,00</a>
+            <a class="precodesconto">R$ 1.800,00</a><br>
+            <a class="precototal" href="#">R$ 1.800,00</a>
         </li>
 
         <li>

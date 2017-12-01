@@ -9,8 +9,7 @@
         <div class="menuLateral">
             <div class="lista">
                 <ul class="menuLista">
-                    
-<!--                    <li class="N1">
+                    <li class="N1">
                         <a href="#">> Computadores</a>
                     </li>
 
@@ -24,13 +23,13 @@
 
                     <li class="N1">
                         <a href="#">> Marcas</a>
-                    </li>-->
+                    </li>
                 </ul>
             </div>
         </div>
         <div class="paginaFuncao">
             <div class="funcao">
-                test
+                <%@include file = "../pages/listGaleriaProdutos.jsp" %>
             </div>
         </div>
     </div>

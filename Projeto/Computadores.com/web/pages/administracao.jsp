@@ -21,7 +21,7 @@
                         <a href="./Administracao?funcao=listCategoria">Cadastro de Categoria</a>
                     </li>
                     <li class="N2">
-                        <a href="#">Cadastro de Marca</a>
+                        <a href="./Administracao?funcao=listMarca">Cadastro de Marca</a>
                     </li>
                     > Clientes
                     </li>
@@ -35,6 +35,9 @@
             <div class="funcao">
                 <c:if test="${funcao.equals('listCategoria')}">
                     <%@include file = "../pages/listCategoria.jsp" %>
+                </c:if>
+                <c:if test="${funcao.equals('listMarca')}">
+                    <%@include file = "../pages/listMarca.jsp" %>
                 </c:if>
                 <c:if test="${funcao.equals('listCliente')}">
                     <%@include file = "../pages/listClienteAdm.jsp" %>

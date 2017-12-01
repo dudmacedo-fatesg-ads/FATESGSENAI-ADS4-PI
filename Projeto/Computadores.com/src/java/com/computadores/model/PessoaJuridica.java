@@ -6,10 +6,10 @@ package com.computadores.model;
  */
 public class PessoaJuridica extends Cliente {
 
+    private String razaoSocial;
     private Long cnpj;
     private String inscricaoestadual;
     private Estado estadoemissor;
-    private String razaoSocial;
 
     public PessoaJuridica() {
         super(TipoPessoa.JURIDICA);
@@ -18,10 +18,39 @@ public class PessoaJuridica extends Cliente {
     public PessoaJuridica(int codigo) {
         super(codigo, TipoPessoa.JURIDICA);
     }
+    
+    // Builder
+    public static PessoaJuridica build() {
+        return new PessoaJuridica();
+    }
+    
+    public PessoaJuridica cnpj(long cnpj) {
+        this.cnpj = cnpj;
+        return this;
+    }
+    
+    public PessoaJuridica inscricaoestadual(String inscricaoestadual) {
+        this.inscricaoestadual = inscricaoestadual;
+        return this;
+    }
+    
+    public PessoaJuridica estadoemissor(Estado estadoemissor) {
+        this.estadoemissor = estadoemissor;
+        return this;
+    }
+    // /Builder
 
     @Override
     public boolean validar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getRazaoSocial() {
+        return razaoSocial;
+    }
+
+    public void setRazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
     }
 
     public Long getCnpj() {
@@ -58,14 +87,6 @@ public class PessoaJuridica extends Cliente {
 
     public void setEstadoemissor(Estado estadoemissor) {
         this.estadoemissor = estadoemissor;
-    }
-
-    public String getRazaoSocial() {
-        return razaoSocial;
-    }
-
-    public void setRazaoSocial(String razaoSocial) {
-        this.razaoSocial = razaoSocial;
     }
 
     @Override

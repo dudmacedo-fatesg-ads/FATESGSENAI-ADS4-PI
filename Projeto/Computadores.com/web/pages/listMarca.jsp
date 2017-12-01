@@ -1,6 +1,6 @@
 <%-- 
-    Document   : listClienteAdm
-    Created on : 01/12/2017, 16:47:13
+    Document   : listMarca
+    Created on : 01/12/2017, 17:41:13
     Author     : eduardo
 --%>
 
@@ -19,27 +19,15 @@
                     <thead>
                         <tr>
                             <th>Código</th>
-                            <th>Tipo</th>
-                            <th>CPF/CNPJ</th>
-                            <th>Nome/Razão</th>
-                            <th>E-mail</th>
+                            <th>Nome</th>
                             <th colspan=2>Ação</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${clientes}" var="cliente">
+                        <c:forEach items="${marcas}" var="marca">
                             <tr>
-                                <td><c:out value="${cliente.codigo}" /></td>
-                                <td><c:out value="${cliente.tipo}" /></td>
-                                <c:if test="${cliente.tipo.id.equals('F')}">
-                                    <td><c:out value="${cliente.cpf_formatado}" /></td>
-                                    <td><c:out value="${cliente.nome}" /></td>
-                                </c:if>
-                                <c:if test="${cliente.tipo.id.equals('J')}">
-                                    <td><c:out value="${cliente.cnpj_formatado}" /></td>
-                                    <td><c:out value="${cliente.razaoSocial}" /></td>
-                                </c:if>
-                                <td><c:out value="${cliente.email}" /></td>
+                                <td><c:out value="${marca.codigo}" /></td>
+                                <td><c:out value="${marca.nome}" /></td>
                                 <td><a id="btnAtualizar" href="#">Atualizar</a><br><a id="btnApagar" href="#">Apagar</a></td>
                             </tr>
                         </c:forEach>

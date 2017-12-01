@@ -26,6 +26,17 @@ public abstract class Cliente implements IEntidade {
         this.codigo = codigo;
         this.tipo = tipo;
     }
+    
+    public static Cliente getNovoCliente(TipoPessoa tipo) {
+        switch (tipo) {
+            case FISICA:
+                return new PessoaFisica();
+            case JURIDICA:
+                return new PessoaJuridica();
+            default:
+                return null;
+        }
+    }
 
     public Integer getCodigo() {
         return codigo;
@@ -98,20 +109,7 @@ public abstract class Cliente implements IEntidade {
     public void setAdministrador(boolean administrador) {
         this.administrador = administrador;
     }
-
+    
     @Override
-    public String toString() {
-        return String.format(
-                "%s - %s - %s - %s - %s - %s - %s - %s - %s",
-                (codigo == null) ? "null" : codigo,
-                (tipo == null) ? "null" : tipo,
-                (telresidencial == null) ? "null" : telresidencial,
-                (telcomercial == null) ? "null" : telcomercial,
-                (telcelular == null) ? "null" : telcelular,
-                (email == null) ? "null" : email,
-                (senha == null) ? "null" : senha,
-                (enderecos == null) ? "null" : enderecos.size() + " endereços",
-                (administrador) ? "Administrador" : "Cliente"
-        );
-    }
+    public abstract String toString();
 }

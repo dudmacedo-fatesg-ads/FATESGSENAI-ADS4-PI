@@ -17,6 +17,10 @@ public class Hash {
     public static final int BCRYPT = 2;
 
     private static final int WORKLOAD = 12;
+    
+    private Hash() {
+        
+    }
 
     public static String getHash(String valor, int metodo) {
         if (metodo == MD5) {

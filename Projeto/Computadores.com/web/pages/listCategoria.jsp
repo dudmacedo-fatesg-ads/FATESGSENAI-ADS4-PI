@@ -12,7 +12,7 @@
             <div class="listagem">
                 <div class="pesquisar">
                     <label>Pesquisar</label>
-                    <input type="text" id="txtBuscar" placeholder="buscar usuario"/>
+                    <input type="text" id="txtBuscar" placeholder="Buscar"/>
                     <button id="btnBuscar" alt="buscar">Buscar</button>
                 </div><!-- pesquisar -->
                 <table border=1>

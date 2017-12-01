@@ -14,42 +14,51 @@ import java.util.logging.Logger;
  */
 public class Config {
 
-    // Recursos para acesso ao Banco de Dados
-    private static String BANCO_DRIVER = "org.postgresql.Driver";
-    private static String BANCO_URL = "jdbc:postgresql://localhost:5432/computadores";
-    private static String BANCO_USER = "postgres";
-    private static String BANCO_PASS = "postgres";
-    
-    // Recursos de auxílio aos formulários
-    private static List<Estado> ESTADOS = null;
+    private static final Config CONFIG;
 
-    static {
+    // Recursos para acesso ao Banco de Dados
+    private String banco_driver;
+    private String banco_url;
+    private String banco_user;
+    private String banco_pass;
+
+    // Recursos de auxílio aos formulários
+    private List<Estado> estados = null;
+
+    private Config() {
+        banco_driver = "org.postgresql.Driver";
+        banco_url = "jdbc:postgresql://localhost:5432/computadores";
+        banco_user = "postgres";
+        banco_pass = "postgres";
         try {
             EstadoDAO dao = new EstadoDAO();
-            ESTADOS = dao.listAll();
+            estados = dao.listAll();
         } catch (DatabaseException ex) {
             Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
-            ESTADOS = null;
         }
     }
 
+    static {
+        CONFIG = new Config();
+    }
+
     public static String getBancoDriver() {
-        return BANCO_DRIVER;
+        return CONFIG.banco_driver;
     }
 
     public static String getBancoURL() {
-        return BANCO_URL;
+        return CONFIG.banco_url;
     }
 
     public static String getBancoUser() {
-        return BANCO_USER;
+        return CONFIG.banco_user;
     }
 
     public static String getBancoPass() {
-        return BANCO_PASS;
+        return CONFIG.banco_pass;
     }
-    
+
     public static Iterator<Estado> getEstados() {
-        return ESTADOS.iterator();
+        return (CONFIG.estados != null) ? CONFIG.estados.iterator() : null;
     }
 }

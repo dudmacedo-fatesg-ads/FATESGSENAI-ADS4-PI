@@ -15,6 +15,10 @@ public class DBFactory {
 
     private static Connection connection = null;
 
+    private DBFactory() {
+
+    }
+
     public static Connection getConnection() {
         if (connection != null) {
             return connection;

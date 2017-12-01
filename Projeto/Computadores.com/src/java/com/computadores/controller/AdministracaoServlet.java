@@ -2,9 +2,11 @@ package com.computadores.controller;
 
 import com.computadores.dal.CategoriaDAO;
 import com.computadores.dal.ClienteDAO;
+import com.computadores.dal.MarcaDAO;
 import com.computadores.error.DatabaseException;
 import com.computadores.model.Categoria;
 import com.computadores.model.Cliente;
+import com.computadores.model.Marca;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
@@ -43,8 +45,39 @@ public class AdministracaoServlet extends HttpServlet {
             response.sendRedirect("./");
         } else {
             if (request.getParameter("funcao") != null) {//
-                //CRUD Clientes
-                if (request.getParameter("funcao").equals("listCliente")) {
+                // CRUD Categorias
+                if (request.getParameter("funcao").equals("listCategoria")) {
+                    request.setAttribute("funcao", "listCategoria");
+
+                    CategoriaDAO cat_dao = new CategoriaDAO();
+
+                    try {
+                        Iterator<Categoria> categorias = cat_dao.list().iterator();
+                        request.setAttribute("categorias", categorias);
+                    } catch (DatabaseException ex) {
+                        Logger.getLogger(AdministracaoServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                } else if (request.getParameter("funcao").equals("editCategoria")) {
+
+                }//
+                // CRUD Marcas
+                else if (request.getParameter("funcao").equals("listMarca")) {
+                    request.setAttribute("funcao", "listMarca");
+
+                    MarcaDAO mar_dao = new MarcaDAO();
+
+                    try {
+                        Iterator<Marca> marcas = mar_dao.list().iterator();
+                        request.setAttribute("marcas", marcas);
+                    } catch (DatabaseException ex) {
+                        Logger.getLogger(AdministracaoServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else if (request.getParameter("funcao").equals("editMarca")) {
+
+                }//
+                // CRUD Clientes
+                else if (request.getParameter("funcao").equals("listCliente")) {
                     request.setAttribute("funcao", "listCliente");
 
                     ClienteDAO cli_dao = new ClienteDAO();
@@ -59,22 +92,6 @@ public class AdministracaoServlet extends HttpServlet {
                 else if (request.getParameter("funcao").equals("editCliente")) {
 
                 } //
-                // CRUD Categorias
-                else if (request.getParameter("funcao").equals("listCategoria")) {
-                    request.setAttribute("funcao", "listCategoria");
-
-                    CategoriaDAO cat_dao = new CategoriaDAO();
-
-                    try {
-                        Iterator<Categoria> categorias = cat_dao.list().iterator();
-                        request.setAttribute("categorias", categorias);
-                    } catch (DatabaseException ex) {
-                        Logger.getLogger(AdministracaoServlet.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
-                } else if (request.getParameter("funcao").equals("editCategoria")) {
-
-                }
             }
             RequestDispatcher view = request.getRequestDispatcher(ADM_PAGE);
             view.forward(request, response);

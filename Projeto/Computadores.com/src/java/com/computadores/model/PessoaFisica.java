@@ -20,6 +20,27 @@ public class PessoaFisica extends Cliente {
     public PessoaFisica(int codigo) {
         super(codigo, TipoPessoa.FISICA);
     }
+    
+    // Builder
+    public static PessoaFisica build() {
+        return new PessoaFisica();
+    }
+    
+    public PessoaFisica cpf(long cpf) {
+        this.cpf = cpf;
+        return this;
+    }
+    
+    public PessoaFisica rg(int rg) {
+        this.rg = rg;
+        return this;
+    }
+    
+    public PessoaFisica dtNasc(Date dtNasc) {
+        this.dtNasc = dtNasc;
+        return this;
+    }
+    // /Builder
 
     @Override
     public boolean validar() {
