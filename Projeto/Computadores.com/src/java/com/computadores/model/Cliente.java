@@ -8,15 +8,15 @@ import java.util.List;
  */
 public abstract class Cliente implements IEntidade {
 
-    private int codigo;
-    private TipoPessoa tipo;
-    private String telresidencial;
-    private String telcomercial;
-    private String telcelular;
-    private String email;
-    private String senha;
-    private List<Endereco> enderecos;
-    private boolean administrador;
+    protected Integer codigo;
+    protected TipoPessoa tipo;
+    protected String telresidencial;
+    protected String telcomercial;
+    protected String telcelular;
+    protected String email;
+    protected String senha;
+    protected List<Endereco> enderecos;
+    protected boolean administrador = false;
 
     protected Cliente(TipoPessoa tipo) {
         this.tipo = tipo;
@@ -27,7 +27,7 @@ public abstract class Cliente implements IEntidade {
         this.tipo = tipo;
     }
 
-    public int getCodigo() {
+    public Integer getCodigo() {
         return codigo;
     }
 
@@ -97,5 +97,21 @@ public abstract class Cliente implements IEntidade {
 
     public void setAdministrador(boolean administrador) {
         this.administrador = administrador;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "%s - %s - %s - %s - %s - %s - %s - %s - %s",
+                (codigo == null) ? "null" : codigo,
+                (tipo == null) ? "null" : tipo,
+                (telresidencial == null) ? "null" : telresidencial,
+                (telcomercial == null) ? "null" : telcomercial,
+                (telcelular == null) ? "null" : telcelular,
+                (email == null) ? "null" : email,
+                (senha == null) ? "null" : senha,
+                (enderecos == null) ? "null" : enderecos.size() + " endereços",
+                (administrador) ? "Administrador" : "Cliente"
+        );
     }
 }

@@ -52,8 +52,6 @@ public class LoginServlet extends HttpServlet {
             String email = request.getParameter("usuarioEmail");
             // senha = senha do usuário. Deverá ser recebido aqui o hash MD5 da senha do usuário
             String senha = request.getParameter("usuarioSenha");
-            // Só pra teste
-            senha = Hash.getHash(senha, Hash.MD5);
 
             try {
                 Cliente cli = dao.retrieveLogin(email, senha);
@@ -61,14 +59,16 @@ public class LoginServlet extends HttpServlet {
                     HttpSession session = request.getSession();
 
                     session.setAttribute("usuarioCodigo", cli.getCodigo());
+                    session.setAttribute("usuarioObj", cli);
                     if (cli.getTipo() == TipoPessoa.FISICA) {
                         session.setAttribute("usuarioNome", new Scanner(((PessoaFisica) cli).getNome()).next());
                     } else if (cli.getTipo() == TipoPessoa.JURIDICA) {
                         session.setAttribute("usuarioNome", new Scanner(((PessoaJuridica) cli).getRazaoSocial()).next());
                     }
 
-                    RequestDispatcher view = request.getRequestDispatcher(HOME_PAGE);
-                    view.forward(request, response);
+                    response.sendRedirect("./");
+//                    RequestDispatcher view = request.getRequestDispatcher("./");
+//                    view.forward(request, response);
                 } else {
                     request.setAttribute("msg", "Não foi encontrado nenhum usuário com esta combinação de e-mail e senha.");
                     RequestDispatcher view = request.getRequestDispatcher(LOGIN_PAGE);
@@ -81,8 +81,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.invalidate();
 
-            RequestDispatcher view = request.getRequestDispatcher(HOME_PAGE);
-            view.forward(request, response);
+            response.sendRedirect("./");
         }
     }
 

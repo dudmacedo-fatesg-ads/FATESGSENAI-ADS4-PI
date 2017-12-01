@@ -8,7 +8,7 @@ function validarFormulario() {
         $("#loginSenha").focus();
         return false;
     }
-
+    $("#loginSenha").val(md5($("#loginSenha").val()));
 
     return true;
 }

@@ -8,15 +8,15 @@ import java.util.Date;
  */
 public class PessoaFisica extends Cliente {
 
-    private long cpf;
-    private int rg;
+    private Long cpf;
+    private Integer rg;
     private String nome;
     private Date dtNasc;
-    
+
     public PessoaFisica() {
         super(TipoPessoa.FISICA);
     }
-    
+
     public PessoaFisica(int codigo) {
         super(codigo, TipoPessoa.FISICA);
     }
@@ -26,7 +26,7 @@ public class PessoaFisica extends Cliente {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public long getCpf() {
+    public Long getCpf() {
         return cpf;
     }
 
@@ -34,7 +34,7 @@ public class PessoaFisica extends Cliente {
         this.cpf = cpf;
     }
 
-    public int getRg() {
+    public Integer getRg() {
         return rg;
     }
 
@@ -58,4 +58,23 @@ public class PessoaFisica extends Cliente {
         this.dtNasc = dtNasc;
     }
 
+    @Override
+    public String toString() {
+        return String.format(
+                "%s - %s - %s - %s - %s - %s - %s - %s - %s - %s - %s - %s - %s",
+                (cpf == null) ? "null" : cpf,
+                (rg == null) ? "null" : rg,
+                (nome == null) ? "null" : nome,
+                (dtNasc == null) ? "null" : dtNasc,
+                (codigo == null) ? "null" : codigo,
+                (tipo == null) ? "null" : tipo,
+                (telresidencial == null) ? "null" : telresidencial,
+                (telcomercial == null) ? "null" : telcomercial,
+                (telcelular == null) ? "null" : telcelular,
+                (email == null) ? "null" : email,
+                (senha == null) ? "null" : senha,
+                (enderecos == null) ? "null" : enderecos.size() + " endereços",
+                (administrador) ? "Administrador" : "Cliente"
+        );
+    }
 }

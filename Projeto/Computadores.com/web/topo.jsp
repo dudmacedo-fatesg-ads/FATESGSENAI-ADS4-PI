@@ -10,9 +10,21 @@
             </a>
             <ul>
                 <li>
-                    <a href="Login.do">
-                        <i class="fa fa-user"></i>Olá <%= (session.getAttribute("usuarioNome") != null)?session.getAttribute("usuarioNome"):"Visitante" %>
+                    <%
+                        if (session.getAttribute("usuarioObj") != null) {
+                    %>
+                    <a href="#">
+                        <i class="fa fa-user"></i>Olá <%= session.getAttribute("usuarioNome")%>
                     </a>
+                    <%
+                    } else {
+                    %>
+                    <a href="Login.do">
+                        <i class="fa fa-user"></i>Olá Visitante
+                    </a>
+                    <%
+                        }
+                    %>
                 </li>
 
                 <li>
@@ -26,25 +38,19 @@
                         <i class="fa fa-shopping-cart"></i>Carrinho de Compras
                     </a>
                 </li>
+                <%
+                    if (session.getAttribute("usuarioObj") != null) {
+                %>
+                <li>
+                    <a href="Login.do?acao=logout">
+                        <i class="fa fa-user"></i>Sair
+                    </a>
+                </li>
+                <%
+                    }
+                %>
             </ul> 
         </div><!-- menu -->
-
-
-        <div class="categorias">
-
-
-            <!--            <form method="POST" action='' name="frmAddUser">
-                            <select name="categorias">
-                                <option value="0">Categorias</option>
-                                <option value="1">Computadores</option>
-                                <option value="2">Notebooks</option>
-                                <option value="3">Parceiros</option>
-                                <option value="4">Peças</option>
-                            </select>               
-                            <input input type="text" name="psquisar" value="" placeholder="pesquise aqui"/>
-                        </form>-->
-        </div>
-
     </section><!--topo-->
 </header>
 <div class="clear"></div>
