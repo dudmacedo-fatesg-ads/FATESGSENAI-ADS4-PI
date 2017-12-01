@@ -38,7 +38,7 @@ body{font:normal 16px 'Calibri_Regular'; color:#948c7b;}
 
 /*HEADER*/
 .header{}
-#topo{}
+#topo{font-family: 'Oswald', sans-serif;}
 .menu{height: 150px;background-color: #7b0000;}
 	.menu img{width: 7%;float: left;padding: 1px 4px;border: solid 1px #7b0000;border-radius: 70px;background: #000;box-shadow: 0 0 29px 10px;margin-left: 30px;margin-top: 20px;}
         .menu h1{float: left;margin-top: 58px;margin-left: 20px;font-size: 40px;text-transform: uppercase;color: #ffffffcf;}          
@@ -50,9 +50,7 @@ body{font:normal 16px 'Calibri_Regular'; color:#948c7b;}
 
 
     
-.categorias{
-    background-color: #000;
-}
+.categorias{background-color: #000;}
     .categorias form{}
     .categorias select{}
     .categorias option{}
@@ -64,9 +62,8 @@ body{font:normal 16px 'Calibri_Regular'; color:#948c7b;}
                 
                 
 /*FOOTER*/
-footer{
-}
-#rodape{}
+footer{}
+#rodape{font-family: 'Oswald', sans-serif;}
 .newsLetter{height: 80px;background-color:#7b0000;text-transform: uppercase;}
     .newsLetter ul{padding-top: 20px;margin-right: 50px;}
         .newsLetter ul li{}
@@ -108,7 +105,7 @@ footer{
             .assinatura a:hover{color:#fff;}
 
 /*CADASTRO*/
-.cadastro{}
+.cadastro{font-family: 'Oswald', sans-serif;}
     .selecionarCadastro{}
         .selecionarCadastro ul{padding: 70px;}
             .selecionarCadastro ul li{border: outset;border-radius: 80px;padding: 45px;margin: 217px 210px;text-align: center;
@@ -120,7 +117,7 @@ footer{
                 .selecionarCadastro ul li a{text-decoration: none;font-size: 19px;color: #f9f9f9;text-transform: lowercase;}
                                
 /*LOGIN E INICIO CADASTRO*/   
-.identificar{background-color: #000;min-height: 650px;}
+.identificar{font-family: 'Oswald', sans-serif;background-color: #000;min-height: 650px;}
 .formLogin{float: left;width: 30%;margin-left: 200px;}
     .formLogin form{margin-left: 50px;padding-top: 90px;}
     .formLogin i{font-size: 36px;border: solid 1px #fff;color: #fff;padding: 16px 22px;border-radius: 34px;margin-left: 120px;}
@@ -129,13 +126,13 @@ footer{
     .formLogin span{color: #fff;}
     .formLogin fieldset{}
     .formLogin label{}
-    .formLogin input{background-color: #000;border: solid 1px #fff;padding: 5px;margin-bottom: 15px;width: 296px;}
-    .formLogin button{background-color: #7b0000;border: none;  padding: 7px 136px;color: #d2cbcb;font-size: 18px;}
+    .formLogin input{background-color: #000;color: #fff;border: solid 1px #fff;padding: 5px;margin-bottom: 15px;width: 296px;}
+    .formLogin button{background-color: #7b0000;cursor: pointer;border: none;  padding: 7px 136px;color: #d2cbcb;font-size: 18px;}
     
     
     
     
-    .formCadastro{float: right;width: 30%;margin-right: 200px;}
+    .formCadastro{font-family: 'Oswald', sans-serif;float: right;width: 30%;margin-right: 200px;}
     .formCadastro form{margin-left: 50px;padding-top: 90px;}
     .formCadastro i{font-size: 30px;border: solid 1px #fff;color: #fff;padding: 20px 20px;border-radius: 36px;margin-left: 120px;}
     .formCadastro h1{text-transform: uppercase;color: #db531e;font-size: 23px;border-bottom: solid 1px;margin-bottom: 10px;margin-right: 27px;margin-top: 15px;}
@@ -143,25 +140,25 @@ footer{
     .formCadastro span{color: #fff;}
     .formCadastro fieldset{}
     .formCadastro label{}
-    .formCadastro input{background-color: #000;border: solid 1px #fff;padding: 5px;margin-bottom: 15px;width: 338px;}
-    .formCadastro button{background-color: #7b0000;border: none;  padding: 7px 136px;color: #d2cbcb;font-size: 18px;}
+    .formCadastro input{background-color: #000;color: #fff;border: solid 1px #fff;padding: 5px;margin-bottom: 15px;width: 338px;}
+    .formCadastro button{background-color: #7b0000;cursor: pointer;border: none;  padding: 7px 136px;color: #d2cbcb;font-size: 18px;}
     
     
     
 /*loginCadastro*/
-#acesso{background-color: #f2f2f2; height: 300px; width: 300px;}
+#acesso{font-family: 'Oswald', sans-serif;background-color: #f2f2f2; height: 300px; width: 300px;}
 
-#login{background-color: #fff; height: 300px; width: 300px;}
+#login{font-family: 'Oswald', sans-serif;background-color: #fff; height: 300px; width: 300px;}
 
 
 
 /*FORMULARIO CLIENTE*/
 
-#cadastroCliente{background-color: #000;padding-bottom: 110px;}
+#cadastroCliente{background-color: #000;padding-bottom: 110px;font-family: 'Oswald', sans-serif;}
 .formularioCadastro{}
     .formularioCadastro form{width: 90%;margin: 0 auto;background-color: #fff;}
-        .formularioCadastro button.enviar{float: right;margin-right: 70px;width: 370px;padding: 6px 0px;background-color: #00f313;font-size: 18px;border: none;margin-top: 15px;}
-        .formularioCadastro button.cancelar{float: left;margin-left: 70px;width: 370px;padding: 6px 0px;background-color: #ff2f00;font-size: 18px;border: none;margin-top: 15px;}
+        .formularioCadastro button.enviar{cursor: pointer;float: right;margin-right: 70px;width: 370px;padding: 6px 0px;background-color: #00f313;font-size: 18px;border: none;margin-top: 15px;}
+        .formularioCadastro button.cancelar{cursor: pointer;float: left;margin-left: 70px;width: 370px;padding: 6px 0px;background-color: #ff2f00;font-size: 18px;border: none;margin-top: 15px;}
         .formularioCadastro form fieldset{}
             .formularioCadastro form fieldset h1{background-color: #7b0000;font-size: 20px;text-transform: uppercase;color: #fff;padding: 10px 0px;text-align: center;font-family: 'Oswald', sans-serif;}
             .formularioCadastro form fieldset ul.listaPincipal{width:100%}
@@ -205,20 +202,65 @@ footer{
                         .formularioCadastro form fieldset ul.listaPincipal li ul.dadosEndereco li select{width: 28%;font-family: 'Oswald', sans-serif;}
                         .formularioCadastro form fieldset ul.listaPincipal li ul.dadosEndereco li option{font-family: 'Oswald', sans-serif;}                
                         
-                        /*List Cliente*/
-                        #listCliente{background-color: #000;}
-                        .listagem{padding-top: 40px;}
-                            .listagem .pesquisar{text-align: center;background-color: #7b0000;font-family: 'Oswald', sans-serif;}
-                                .listagem .pesquisar label{font-size: 18px;color: #fff;text-transform: uppercase;}
-                                .listagem .pesquisar input{width: 490px;padding: 6px;font-family: 'Oswald', sans-serif;}
-                                .listagem .pesquisar button{padding: 6px;background-color: #000;color: #fff;border: solid 2px #fff;box-shadow: 0 0 13px 1px;font-family: 'Oswald', sans-serif;}
-                            
-                            .listagem table{margin: 0px auto;border: solid 1px #fff;}
-                                .listagem table thead{}
-                                    .listagem table thead tr{}
-                                        .listagem table thead tr th{width: 100px;text-align: center;color: #fff;font-family: 'Oswald', sans-serif;}
-                                .listagem table tbody{}
-                                    .listagem table tbody tr{}
-                                        .listagem table tbody tr td{color: #fff;width: 91px;font-family: 'Oswald', sans-serif;}
-                                            .listagem table tbody tr td a{color: #fff;background-color: #7b0000;padding: 0 20px;}
-                                            .listagem table tbody tr td a:hover{color: #000;background-color: #fff;}
+/*LIST CLIENTE*/
+#listCliente{background-color: #000;font-family: 'Oswald', sans-serif;}
+.listagem{padding-top: 40px;}
+    .listagem .pesquisar{text-align: center;background-color: #7b0000;font-family: 'Oswald', sans-serif;}
+        .listagem .pesquisar label{font-size: 18px;color: #fff;text-transform: uppercase;}
+        .listagem .pesquisar input{width: 490px;padding: 6px;font-family: 'Oswald', sans-serif;}
+        .listagem .pesquisar button{padding: 6px;background-color: #000;color: #fff;border: solid 2px #fff;box-shadow: 0 0 13px 1px;font-family: 'Oswald', sans-serif;}
+
+    .listagem table{margin: 0px auto;border: solid 1px #fff;}
+        .listagem table thead{}
+            .listagem table thead tr{}
+                .listagem table thead tr th{width: 100px;text-align: center;color: #fff;font-family: 'Oswald', sans-serif;}
+        .listagem table tbody{}
+            .listagem table tbody tr{}
+                .listagem table tbody tr td{color: #fff;width: 91px;font-family: 'Oswald', sans-serif;}
+                    .listagem table tbody tr td a{color: #fff;background-color: #7b0000;padding: 0 20px;}
+                    .listagem table tbody tr td a:hover{color: #000;background-color: #fff;}
+                    
+                    
+/*PRODUTOS HOME*/
+#produtos{font-family: 'Oswald', sans-serif;background-color: #000;padding-bottom: 2019px;}
+.paginaPrincipal{background-color: #000;}
+.paginaPrincipal .menuProdutos{width: 15%;float: left;}
+.paginaPrincipal .menuProdutos ul.menuLista{text-align: center;color: #fff;}
+.paginaPrincipal .menuProdutos ul.menuLista li{}
+.paginaPrincipal .menuProdutos ul.menuLista li label{font-size: 18px;font-weight: bolder;margin-right: 150px;}
+.paginaPrincipal .menuProdutos ul.menuLista li a{color: #fff;margin-right: 90px;}
+.paginaPrincipal .menuProdutos ul.menuLista li a:hover{color: #7b0000;background-color: #fff;}
+
+.paginaPrincipal .listagemProdutos{float: right;width: 80%;padding-bottom: 86px;padding-left: 40px;background-color: #fff;}
+    .paginaPrincipal .listagemProdutos ul.galeriaProduto{}
+        .paginaPrincipal .listagemProdutos ul.galeriaProduto li{width: 40%;display: inline-block;color: #000;margin-top: 40px;}
+            .paginaPrincipal .listagemProdutos ul.galeriaProduto li img{width: 30%;margin: 0 auto;}
+            .paginaPrincipal .listagemProdutos ul.galeriaProduto li h3{width: 40%;margin-bottom: 20px;margin: 33px auto;text-align: center;}
+            .paginaPrincipal .listagemProdutos ul.galeriaProduto li a{color: #fff;background-color: #7b0000;padding: 10px 48px;margin: 131px;}
+            .paginaPrincipal .listagemProdutos ul.galeriaProduto li a:hover{color: #7b0000;background-color: #fff;}
+            
+            
+            
+            
+/*cadastro produto*/
+.cadastroProduto{font-family: 'Oswald', sans-serif;background-color: #000;}
+    .cadastroProduto form{background-color: #fff;width: 80%;margin: 0 auto;}
+        .cadastroProduto form fieldset{margin-left: 30px;}
+            .cadastroProduto form fieldset input{}
+            .cadastroProduto form fieldset label{display: grid;color: #000;font-weight: bolder;font-size: 18px;margin-top: 30px;}
+            .cadastroProduto form fieldset textarea{}
+            .cadastroProduto form fieldset select{}
+            .cadastroProduto form fieldset optiont{}
+            .cadastroProduto form fieldset button{margin-top: 20px;margin-right: 30px;margin-bottom: 21px;}
+            
+            
+/*Cadastro Categoria*/
+#cadastroCategoria{background-color: #000;}
+.cadastrarCategoria{padding-top: 30px;padding-bottom: 31px;}
+    .cadastrarCategoria form{background-color: #fff;width: 80%;margin: 0 auto;}
+        .cadastrarCategoria form fieldset{margin-left: 21px;}
+            .cadastrarCategoria form fieldset ul{}
+                .cadastrarCategoria form fieldset ul li{width: 19%;margin-top: 10px;}
+                    .cadastrarCategoria form fieldset ul li label{margin-bottom: 11px;}
+                    .cadastrarCategoria form fieldset ul li input{}
+        .cadastrarCategoria form fieldset button{margin-top: 10px;margin-bottom: 10px;}           

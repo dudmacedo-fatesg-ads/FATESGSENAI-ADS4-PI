@@ -168,7 +168,7 @@ public class RegisterServlet extends HttpServlet {
                     }
                 }
                 
-                response.sendRedirect("./");
+//                response.sendRedirect("./");
             }
         } //
         //
