@@ -223,24 +223,24 @@ footer{}
 
 /*PAGINA BASE*/
 #principal {font-family: 'Oswald', sans-serif;background-image: url("../../media/imagens/index/mainbackground.jpg");background-repeat: repeat-y;background-position: center;background-attachment: fixed;background-size: 100%;align-items: center;}
-.conteudo {background-color: #fff;width: 80%;min-width: 1000px;overflow:auto;}
-.conteudo .menuLateral {margin-left: -15px;width: 20%; background-color: #000;display: inline-block;height: 100%;overflow:auto;}
-.conteudo .menuLateral .lista {margin: 15px;}
-.conteudo .menuLateral ul.menuLista {color: #fff;}
-.conteudo .menuLateral ul.menuLista li {}
-.conteudo .menuLateral ul.menuLista li.N1 a{font-size: 18px;color: #fff;font-weight: bolder;}
-.conteudo .menuLateral ul.menuLista li.N1 a:hover{color: #7b0000;background-color: #fff;}
-.conteudo .menuLateral ul.menuLista li.N2 a{margin-left: 15px;color: #fff;}
-.conteudo .menuLateral ul.menuLista li.N2 a:hover{color: #7b0000;background-color: #fff;}
+.conteudoMain {background-color: #fff;width: 80%;min-width: 1000px;}
+.conteudoMain .menuLateral {margin-left: -15px;width: 20%; background-color: #000;display: inline-block;height: 100%;overflow:auto;}
+.conteudoMain .menuLateral .lista {margin: 15px;}
+.conteudoMain .menuLateral ul.menuLista {color: #fff;}
+.conteudoMain .menuLateral ul.menuLista li {}
+.conteudoMain .menuLateral ul.menuLista li.N1 a{font-size: 18px;color: #fff;font-weight: bolder;}
+.conteudoMain .menuLateral ul.menuLista li.N1 a:hover{color: #7b0000;background-color: #fff;}
+.conteudoMain .menuLateral ul.menuLista li.N2 a{margin-left: 15px;color: #fff;}
+.conteudoMain .menuLateral ul.menuLista li.N2 a:hover{color: #7b0000;background-color: #fff;}
 
-.conteudo .paginaFuncao {background-color: #fff;float:right;width: 80%;display: block;height: 100%;overflow:auto;}
-.conteudo .paginaFuncao .funcao {margin: 15px;}
+.conteudoMain .paginaFuncao {background-color: #fff;float:right;width: 80%;display: block;height: 100%;overflow:auto;}
+.conteudoMain .paginaFuncao .funcao {margin: 15px;}
                     
 /*PRODUTOS HOME*/
-.conteudo .paginaFuncao .funcao ul.galeriaProduto {}
-.conteudo .paginaFuncao .funcao ul.galeriaProduto li {width: 30%;margin-left: 3%;margin-top: 40px;display: inline-block;}
-.conteudo .paginaFuncao .funcao ul.galeriaProduto li img{width: 30%; margin: 0 auto;}
-.conteudo .paginaFuncao .funcao ul.galeriaProduto li h3 {text-align: center;}
+.conteudoMain .paginaFuncao .funcao ul.galeriaProduto {}
+.conteudoMain .paginaFuncao .funcao ul.galeriaProduto li {width: 30%;margin-left: 3%;margin-top: 40px;display: inline-block;}
+.conteudoMain .paginaFuncao .funcao ul.galeriaProduto li img{width: 30%; margin: 0 auto;}
+.conteudoMain .paginaFuncao .funcao ul.galeriaProduto li h3 {text-align: center;}
 
 /*#teste .listagemProdutos ul.galeriaProduto{}
 #teste .listagemProdutos ul.galeriaProduto li{width: 40%;display: inline-block;color: #000;margin-top: 40px;}
