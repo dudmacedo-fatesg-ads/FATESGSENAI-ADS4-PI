@@ -25,6 +25,8 @@
         <%@include file = "pages/formularioAcesso.jsp" %>
         <%} else if (request.getParameter("p").equalsIgnoreCase("editCliente")) { %>
         <%@include file = "pages/editCliente.jsp" %>
+        <%} else if (request.getParameter("p").equalsIgnoreCase("administracao")) { %>
+        <%@include file = "pages/administracao.jsp" %>
         <%}%>
 
         <h1></h1>

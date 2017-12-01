@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -275,7 +276,44 @@ public class ClienteDAO implements IEntidadeDAO<Cliente> {
 
     @Override
     public List<Cliente> list() throws DatabaseException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        String sql = String.format("SELECT * FROM %s", getTabela());
+
+        try (PreparedStatement pstmt = cnx.prepareStatement(sql)) {
+
+            ResultSet rs = pstmt.executeQuery();
+
+            List<Cliente> lista = new ArrayList<>();
+            while (rs.next()) {
+                TipoPessoa tipo = TipoPessoa.getById(rs.getString("tipo"));
+                Cliente ret = null;
+                if (tipo == TipoPessoa.FISICA) {
+                    PessoaFisica cli = new PessoaFisica(rs.getInt("codigo"));
+                    cli.setCpf(rs.getLong("cpf"));
+                    cli.setRg(rs.getInt("rg"));
+                    cli.setNome(rs.getString("nome"));
+                    cli.setDtNasc(rs.getDate("dtnasc"));
+                    ret = cli;
+                } else if (tipo == TipoPessoa.JURIDICA) {
+                    PessoaJuridica cli = new PessoaJuridica(rs.getInt("codigo"));
+                    cli.setCnpj(rs.getLong("cnpj"));
+                    String ie = rs.getString("ie");
+                    if (ie != null) {
+                        cli.setInscricaoestadual(ie);
+                        cli.setEstadoemissor(new Estado(rs.getInt("ie_estadoemissor")));
+                    }
+                    cli.setRazaoSocial(rs.getString("razaosocial"));
+                    ret = cli;
+                }
+                ret.setEmail(rs.getString("email"));
+
+                lista.add(ret);
+            }
+            return lista;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DatabaseException(ex, "Erro ao recuperar registro");
+        }
     }
 
 }

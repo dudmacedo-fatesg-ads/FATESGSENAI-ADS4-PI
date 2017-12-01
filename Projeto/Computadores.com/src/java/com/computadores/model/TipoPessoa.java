@@ -15,6 +15,14 @@ public enum TipoPessoa {
         this.id = id;
         this.descricao = descricao;
     }
+    
+    public String getId() {
+        return id;
+    }
+    
+    public String getDescricao() {
+        return descricao;
+    }
 
     public static TipoPessoa getById(String id) {
         switch (id) {

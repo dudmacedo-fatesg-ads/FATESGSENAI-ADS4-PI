@@ -27,6 +27,18 @@ public class PessoaJuridica extends Cliente {
     public Long getCnpj() {
         return cnpj;
     }
+    
+    public String getCnpj_formatado() {
+        String retorno = String.format("%014d",cnpj);
+        return String.format(
+                "%s.%s.%s/%s-%s",
+                retorno.substring(0, 2),
+                retorno.substring(2, 5),
+                retorno.substring(5, 8),
+                retorno.substring(8, 12),
+                retorno.substring(12)
+        );
+    }
 
     public void setCnpj(long cnpj) {
         this.cnpj = cnpj;

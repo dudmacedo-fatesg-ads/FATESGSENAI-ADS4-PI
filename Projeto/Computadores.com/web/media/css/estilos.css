@@ -25,10 +25,10 @@ body{font:normal 16px 'Calibri_Regular'; color:#948c7b;}
 	::selection {background:#df2e2c; color:#ffffff;} 
 	::-webkit-selection {background:#df2e2c; color:#ffffff;}
 	::-moz-selection {background:#df2e2c; color:#ffffff;}
-	::-webkit-input-placeholder {color: #dedede; font-family: 'Calibri_Regular';}
-	::-moz-placeholder {color: #dedede; font-family: 'Calibri_Regular';}
-	:-ms-input-placeholder {color: #dedede; font-family: 'Calibri_Regular';}
-	:-moz-placeholder {color: #dedede; font-family: 'Calibri_Regular';}
+	::-webkit-input-placeholder {color: #6b6455; font-family: 'Calibri_Regular';}
+	::-moz-placeholder {color: #6b6455; font-family: 'Calibri_Regular';}
+	:-ms-input-placeholder {color: #6b6455; font-family: 'Calibri_Regular';}
+	:-moz-placeholder {color: #6b6455; font-family: 'Calibri_Regular';}
 
 .conteudo {margin-right: auto;margin-left: auto;padding-left: 15px;padding-right: 15px;}
 .linha {margin-left: -15px;margin-right: -15px;position: relative;}
@@ -47,9 +47,16 @@ body{font:normal 16px 'Calibri_Regular'; color:#948c7b;}
         .menu ul li a{color: #fff;font-size: 20px;margin-right: 30px;border: solid 1px #151414;padding: 10px 10px;box-shadow: 0px 0px 33px 0px;background-color: #000;border-radius: 15px;}
         	.menu ul li a:hover{background-color: #fff;color: #000;}
         .menu ul li i{margin-right: 10px;}
+.menuauxiliar{height: 60px;background-color: #7b0000;}
+	.menuauxiliar img{width: 7%;float: left;padding: 1px 4px;border: solid 1px #7b0000;border-radius: 70px;background: #000;box-shadow: 0 0 29px 10px;margin-left: 30px;}
+        .menuauxiliar h1{float: left;margin-left: 20px;font-size: 40px;text-transform: uppercase;color: #ffffffcf;}          
+                  .menuauxiliar ul{float: right;}
+                    .menuauxiliar ul li{display: inline;}
+        .menuauxiliar ul li a{color: #fff;font-size: 20px;margin-right: 30px;border: solid 1px #151414;padding: 10px 10px;box-shadow: 0px 0px 33px 0px;background-color: #000;border-radius: 15px;}
+        	.menuauxiliar ul li a:hover{background-color: #fff;color: #000;}
+        .menuauxiliar ul li i{margin-right: 10px;}
 
 
-    
 .categorias{background-color: #000;}
     .categorias form{}
     .categorias select{}
@@ -202,8 +209,8 @@ footer{}
                         .formularioCadastro form fieldset ul.listaPincipal li ul.dadosEndereco li select{width: 28%;font-family: 'Oswald', sans-serif;}
                         .formularioCadastro form fieldset ul.listaPincipal li ul.dadosEndereco li option{font-family: 'Oswald', sans-serif;}                
                         
-/*LIST CLIENTE*/
-#listCliente{background-color: #000;font-family: 'Oswald', sans-serif;}
+/*LISTAS CRUD*/
+#list{background-color: #000;font-family: 'Oswald', sans-serif;}
 .listagem{padding-top: 40px;}
     .listagem .pesquisar{text-align: center;background-color: #7b0000;font-family: 'Oswald', sans-serif;}
         .listagem .pesquisar label{font-size: 18px;color: #fff;text-transform: uppercase;}
@@ -216,8 +223,8 @@ footer{}
                 .listagem table thead tr th{width: 100px;text-align: center;color: #fff;font-family: 'Oswald', sans-serif;}
         .listagem table tbody{}
             .listagem table tbody tr{}
-                .listagem table tbody tr td{color: #fff;width: 91px;font-family: 'Oswald', sans-serif;}
-                    .listagem table tbody tr td a{color: #fff;background-color: #7b0000;padding: 0 20px;}
+                .listagem table tbody tr td{color: #fff;font-family: 'Oswald', sans-serif;}
+                    .listagem table tbody tr td a{width:100px;color: #fff;background-color: #7b0000;padding: 0 20px;}
                     .listagem table tbody tr td a:hover{color: #000;background-color: #fff;}
 
 

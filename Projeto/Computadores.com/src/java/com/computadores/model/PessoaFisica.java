@@ -30,6 +30,17 @@ public class PessoaFisica extends Cliente {
         return cpf;
     }
 
+    public String getCpf_formatado() {
+        String retorno = String.format("%011d",cpf);
+        return String.format(
+                "%s.%s.%s-%s",
+                retorno.substring(0, 3),
+                retorno.substring(3, 6),
+                retorno.substring(6, 9),
+                retorno.substring(9)
+        );
+    }
+
     public void setCpf(long cpf) {
         this.cpf = cpf;
     }
